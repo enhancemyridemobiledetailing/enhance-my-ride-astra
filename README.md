@@ -1,21 +1,21 @@
-# Enhance My Ride Astra preview
+# Enhance My Ride — Cinematic Preview
 
-A separate concept website for visual review. It uses original Enhance My Ride business assets and the publicly available Astra Labs reference hero videos, with new HTML, CSS and JavaScript authored for this project.
+A standalone, responsive mobile detailing website for Enhance My Ride Auto Spa & Mobile Detailing. The HTML, CSS, and JavaScript in `site/` were written for this project; no reference-site source code, stylesheets, scripts, graphics, logos, or promotional copy are used.
 
 ## Local preview
 
-Serve the `site/` directory as a static site. For example:
+From this directory, run:
 
 ```sh
-python3 -m http.server 8767 --directory site
+python3 -m http.server 8767 --bind 127.0.0.1 --directory site
 ```
 
-Then open `http://127.0.0.1:8767/`.
+Then open `http://127.0.0.1:8767/`. The preview is local to this computer and is not a production deployment.
 
-## Deployment
+## Preview hosting
 
-The `main` branch workflow publishes `site/` to this repository's GitHub Pages project URL. The preview has `noindex` metadata and no custom domain, canonical URL, CNAME, or DNS configuration. It is not connected to `enhancemyride.com`.
+Do not enable GitHub Pages for this repository while it is owned by the Enhance My Ride GitHub account. GitHub Pages routed the project path through the existing `enhancemyride.com` custom domain. The Pages site has been unpublished and its workflow removed. Use an independently hosted preview that does not use `enhancemyride.com`.
 
-The QR card route is `site/scan.html`; its main action points to `book-now.html` in this separate preview.
+## Assets and licensing
 
-See [ASSET_SOURCES.md](ASSET_SOURCES.md) for footage provenance and original source URLs.
+See [ASSET_SOURCES.md](ASSET_SOURCES.md) for business-media provenance, third-party font licenses, and remaining verification limits. The media-ownership statements for recovered hero footage are based on the business owner's confirmation.

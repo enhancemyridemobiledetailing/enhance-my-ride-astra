@@ -1,0 +1,13 @@
+{
+  "name": "enhance-my-ride-bookings",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --config wrangler.jsonc",
+    "db:local": "wrangler d1 migrations apply enhance-my-ride-bookings --local",
+    "test": "node tests/run.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "4.161.0"
+  }
+}

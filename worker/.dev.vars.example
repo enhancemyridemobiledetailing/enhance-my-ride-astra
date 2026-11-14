@@ -1,0 +1,4 @@
+# Copy this file to .dev.vars for Wrangler's loopback-only mock integration.
+# Do not add live secrets here or commit .dev.vars.
+LOCAL_MOCK_SERVICES=true
+RATE_LIMIT_SALT=local-only-not-a-production-secret

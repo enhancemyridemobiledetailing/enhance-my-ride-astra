@@ -65,6 +65,8 @@
   const lightbox = document.getElementById('lightbox');
   const lightboxImage = lightbox?.querySelector('img');
   const lightboxCaption = lightbox?.querySelector('p');
+  const gallery = document.getElementById('gallery-rail');
+  const galleryToggle = document.getElementById('gallery-toggle');
   document.querySelectorAll('.work-card').forEach(card => card.addEventListener('click', () => {
     if (!lightbox || !lightboxImage) return;
     lightboxImage.src = card.dataset.image;
@@ -72,6 +74,12 @@
     if (lightboxCaption) lightboxCaption.textContent = card.dataset.caption || '';
     lightbox.showModal();
   }));
+  galleryToggle?.addEventListener('click', () => {
+    const expanded = galleryToggle.getAttribute('aria-expanded') !== 'true';
+    gallery?.classList.toggle('is-expanded', expanded);
+    galleryToggle.setAttribute('aria-expanded', String(expanded));
+    galleryToggle.textContent = expanded ? 'Show selected work' : 'View all work (49 photos)';
+  });
   lightbox?.querySelector('.lightbox-close')?.addEventListener('click', () => lightbox.close());
   lightbox?.addEventListener('click', event => {
     if (event.target === lightbox) lightbox.close();
@@ -97,28 +105,143 @@
 
   const form = document.getElementById('quote-form');
   const formNote = document.getElementById('form-note');
-  form?.addEventListener('submit', event => {
+  const formStatus = document.getElementById('form-status');
+  const packageSelect = form?.querySelector('select[name="package"]');
+  const requestIdField = form?.querySelector('input[name="request_id"]');
+  const turnstileWrap = document.getElementById('turnstile-wrap');
+  const turnstileResponse = document.getElementById('turnstile-response');
+  const preferredDate = form?.querySelector('input[name="preferred_date"]');
+  let turnstileWidgetId = null;
+  if (requestIdField) requestIdField.value = makeRequestId();
+  if (preferredDate) preferredDate.min = new Date().toISOString().slice(0, 10);
+
+  const showFormStatus = (message, kind = 'error') => {
+    if (!formStatus) return;
+    formStatus.textContent = message;
+    formStatus.hidden = false;
+    formStatus.classList.toggle('is-error', kind === 'error');
+    formStatus.classList.toggle('is-success', kind === 'success');
+  };
+
+  function makeRequestId() {
+    return window.crypto?.randomUUID ? window.crypto.randomUUID() : `local-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+  }
+
+  function addTurnstile(sitekey) {
+    if (!sitekey || !turnstileWrap || document.getElementById('turnstile-api')) return;
+    turnstileWrap.hidden = false;
+    const script = document.createElement('script');
+    script.id = 'turnstile-api';
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+    script.async = true;
+    script.defer = true;
+    script.onload = () => {
+      if (!window.turnstile) return;
+      turnstileWidgetId = window.turnstile.render('#turnstile-widget', {
+        sitekey,
+        theme: 'dark',
+        action: 'booking_request',
+        callback: token => { if (turnstileResponse) turnstileResponse.value = token; },
+        'expired-callback': () => { if (turnstileResponse) turnstileResponse.value = ''; }
+      });
+    };
+    script.onerror = () => showFormStatus('The security check did not load. Please refresh the page or call (323) 327-1806.');
+    document.head.append(script);
+  }
+
+  const bookingConfigPromise = fetch('/api/config', { headers: { Accept: 'application/json' }, cache: 'no-store' })
+    .then(response => response.ok ? response.json() : Promise.reject(new Error('config unavailable')))
+    .then(config => {
+      if (config.mode === 'local_mock') {
+        if (formNote) formNote.textContent = 'Local test mode: requests and photos are saved only in local mock storage. No email is sent.';
+      } else if (config.mode === 'live' && config.turnstileSiteKey) {
+        if (formNote) formNote.textContent = 'Your request and photos are sent securely to Enhance My Ride.';
+        addTurnstile(config.turnstileSiteKey);
+      } else if (formNote) {
+        formNote.textContent = 'The secure booking backend is not fully configured. No request will be sent until setup is complete.';
+      }
+      return config;
+    })
+    .catch(() => {
+      if (formNote) formNote.textContent = 'The booking service is unavailable. No request has been sent.';
+      return { mode: 'unavailable' };
+    });
+
+  document.querySelectorAll('a[data-package]').forEach(link => link.addEventListener('click', () => {
+    if (packageSelect) packageSelect.value = link.dataset.package;
+  }));
+  const queryPackage = new URLSearchParams(window.location.search).get('package');
+  if (queryPackage && packageSelect && [...packageSelect.options].some(option => option.value === queryPackage)) {
+    packageSelect.value = queryPackage;
+  }
+  form?.addEventListener('submit', async event => {
     event.preventDefault();
-    const data = new FormData(form);
+    formStatus && (formStatus.hidden = true);
+    const trap = form.querySelector('input[name="website"]');
+    if (trap?.value) return;
+
     const photoInput = form.querySelector('input[type="file"]');
-    const photoNames = photoInput && photoInput.files.length ? Array.from(photoInput.files).map(file => file.name).join(', ') : 'No photos selected';
-    const body = [
-      'Quote request for Enhance My Ride',
-      '',
-      'Name: ' + data.get('name'),
-      'Email: ' + data.get('email'),
-      'Phone: ' + (data.get('phone') || 'Not provided'),
-      'Service location: ' + data.get('location'),
-      'Vehicle: ' + data.get('vehicle'),
-      'Package: ' + data.get('package'),
-      'Condition / request: ' + (data.get('condition') || 'Not provided'),
-      'Selected photo filenames: ' + photoNames,
-      '',
-      'If photos are needed, attach them to this email before sending.'
-    ].join('\n');
-    const subject = 'Detailing quote request · ' + (data.get('vehicle') || 'Vehicle');
-    if (formNote) formNote.textContent = 'Your email app should open with the request addressed to info@enhancemyride.com. Please attach any selected photos before sending.';
-    window.location.href = 'mailto:info@enhancemyride.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    const photos = [...(photoInput?.files || [])];
+    const totalBytes = photos.reduce((sum, file) => sum + file.size, 0);
+    if (photos.length > 5) {
+      showFormStatus('Please select no more than 5 vehicle photos.');
+      photoInput?.focus();
+      return;
+    }
+    if (totalBytes > 8 * 1024 * 1024) {
+      showFormStatus('Please keep the selected vehicle photos under 8 MB total.');
+      photoInput?.focus();
+      return;
+    }
+    if (photos.some(file => !file.type.startsWith('image/'))) {
+      showFormStatus('Please select image files for the vehicle photos.');
+      photoInput?.focus();
+      return;
+    }
+
+    const config = await bookingConfigPromise;
+    if (config.mode !== 'local_mock' && config.mode !== 'live') {
+      showFormStatus('The secure booking backend is not ready. Nothing was sent or uploaded. Please call (323) 327-1806.');
+      return;
+    }
+    if (config.mode === 'live' && !turnstileResponse?.value) {
+      showFormStatus('Please complete the security check before submitting.');
+      return;
+    }
+
+    const submitButton = form.querySelector('button[type="submit"]');
+    const originalLabel = submitButton?.textContent;
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = 'SENDING REQUEST…';
+    }
+    const formData = new FormData(form);
+    if (config.mode === 'local_mock') formData.set('turnstile_token', 'local-mock-pass');
+    try {
+      const response = await fetch('/api/bookings', { method: 'POST', body: formData, headers: { Accept: 'application/json' } });
+      const result = await response.json().catch(() => null);
+      if (result?.received === true) {
+        showFormStatus('Your request and photos were securely saved, but the email notification is still pending. Please call (323) 327-1806 to confirm.', 'error');
+        return;
+      }
+      if (!response.ok || result?.ok !== true) throw new Error('The request service did not confirm receipt.');
+      form.reset();
+      if (requestIdField) requestIdField.value = makeRequestId();
+      if (config.mode === 'local_mock') {
+        showFormStatus('Local test request saved with its photos. No email was sent.', 'success');
+      } else {
+        showFormStatus('Your detail request was received. We’ll follow up using the contact information you provided.', 'success');
+      }
+      if (turnstileWidgetId !== null) window.turnstile?.reset(turnstileWidgetId);
+    } catch {
+      showFormStatus('We could not confirm delivery. Your request has not been marked as sent; please try again or call (323) 327-1806.');
+      if (turnstileWidgetId !== null) window.turnstile?.reset(turnstileWidgetId);
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = originalLabel || 'SUBMIT DETAIL REQUEST';
+      }
+    }
   });
 
   const year = document.getElementById('year');

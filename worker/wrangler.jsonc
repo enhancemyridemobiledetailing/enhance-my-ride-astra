@@ -1,0 +1,42 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "enhance-my-ride-bookings",
+  "main": "src/index.js",
+  "compatibility_date": "2026-11-12",
+  "workers_dev": true,
+  "assets": {
+    "directory": "../site",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "d1_databases": [
+    {
+      "binding": "BOOKINGS_DB",
+      "database_name": "enhance-my-ride-bookings",
+      "database_id": "c08fce7b-8a25-4943-afdb-2933f3690c8e",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "BOOKING_PHOTOS",
+      "bucket_name": "enhance-my-ride-booking-photos"
+    }
+  ],
+  "vars": {
+    "ALLOWED_ORIGINS": "https://enhancemyride.com,https://www.enhancemyride.com,https://enhance-my-ride-bookings.enhancemyridemobiledetailing.workers.dev",
+    "TURNSTILE_SITE_KEY": "0x4AAAAAAGAbLv4hq-SGJAFs",
+    "TURNSTILE_HOSTNAMES": "enhancemyride.com,www.enhancemyride.com,enhance-my-ride-bookings.enhancemyridemobiledetailing.workers.dev",
+    "MAX_PHOTO_COUNT": "5",
+    "MAX_UPLOAD_BYTES": "8388608",
+    "MAX_REQUEST_BYTES": "12582912",
+    "RATE_LIMIT_PER_HOUR": "5",
+    "BOOKING_RETENTION_DAYS": "90"
+  },
+  "triggers": {
+    "crons": ["*/5 * * * *", "2 12 * * *"]
+  },
+  "observability": {
+    "enabled": true
+  }
+}
