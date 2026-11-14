@@ -1,9 +1,10 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "enhance-my-ride-bookings",
+  "name": "enhance-my-ride-astra",
   "main": "src/index.js",
   "compatibility_date": "2026-11-12",
   "workers_dev": true,
+  "preview_urls": false,
   "assets": {
     "directory": "../site",
     "binding": "ASSETS",
@@ -24,9 +25,9 @@
     }
   ],
   "vars": {
-    "ALLOWED_ORIGINS": "https://enhancemyride.com,https://www.enhancemyride.com,https://enhance-my-ride-bookings.enhancemyridemobiledetailing.workers.dev",
+    "ALLOWED_ORIGINS": "https://enhancemyride.com,https://www.enhancemyride.com,https://enhance-my-ride-astra.enhancemyridemobiledetailing.workers.dev",
     "TURNSTILE_SITE_KEY": "0x4AAAAAAGAbLv4hq-SGJAFs",
-    "TURNSTILE_HOSTNAMES": "enhancemyride.com,www.enhancemyride.com,enhance-my-ride-bookings.enhancemyridemobiledetailing.workers.dev",
+    "TURNSTILE_HOSTNAMES": "enhancemyride.com,www.enhancemyride.com,enhance-my-ride-astra.enhancemyridemobiledetailing.workers.dev",
     "MAX_PHOTO_COUNT": "5",
     "MAX_UPLOAD_BYTES": "8388608",
     "MAX_REQUEST_BYTES": "12582912",
