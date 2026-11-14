@@ -138,7 +138,13 @@ export default {
     }
 
     if (url.pathname.startsWith("/api/")) return json({ ok: false, error: "not_found" }, 404);
-    return env.ASSETS ? env.ASSETS.fetch(request) : new Response("Not found", { status: 404 });
+    if (env.ASSETS) {
+      const assetRequest = url.pathname === "/" && (request.method === "GET" || request.method === "HEAD")
+        ? new Request(new URL("/index.html", url), request)
+        : request;
+      return env.ASSETS.fetch(assetRequest);
+    }
+    return new Response("Not found", { status: 404 });
   },
 
   async scheduled(controller, env, ctx) {
