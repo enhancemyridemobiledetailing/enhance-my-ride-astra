@@ -65,8 +65,6 @@
   const lightbox = document.getElementById('lightbox');
   const lightboxImage = lightbox?.querySelector('img');
   const lightboxCaption = lightbox?.querySelector('p');
-  const gallery = document.getElementById('gallery-rail');
-  const galleryToggle = document.getElementById('gallery-toggle');
   document.querySelectorAll('.work-card').forEach(card => card.addEventListener('click', () => {
     if (!lightbox || !lightboxImage) return;
     lightboxImage.src = card.dataset.image;
@@ -74,12 +72,6 @@
     if (lightboxCaption) lightboxCaption.textContent = card.dataset.caption || '';
     lightbox.showModal();
   }));
-  galleryToggle?.addEventListener('click', () => {
-    const expanded = galleryToggle.getAttribute('aria-expanded') !== 'true';
-    gallery?.classList.toggle('is-expanded', expanded);
-    galleryToggle.setAttribute('aria-expanded', String(expanded));
-    galleryToggle.textContent = expanded ? 'Show selected work' : 'View all work (49 photos)';
-  });
   lightbox?.querySelector('.lightbox-close')?.addEventListener('click', () => lightbox.close());
   lightbox?.addEventListener('click', event => {
     if (event.target === lightbox) lightbox.close();
