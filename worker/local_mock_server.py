@@ -28,6 +28,12 @@ MAX_PHOTO_BYTES = 8 * 1024 * 1024
 MAX_PHOTOS = 5
 PACKAGE_VALUES = {
     "Enhance Gold", "Enhance Black Label", "Showroom Edition",
+    "Enhance Interior Detail", "Enhance Deep Interior Detail",
+    "Enhance Ceramic Coating", "Enhance Paint Correction",
+    "Enhance Showroom Edition — custom quote",
+    "Enhance Paint Protection — custom quote",
+    "Enhance Wheels, Glass & Exterior — custom quote",
+    "Enhance Interior Care — custom quote",
     "Specialty service — custom quote", "Not sure yet",
 }
 TIME_VALUES = {"Flexible", "8 AM – 10 AM", "10 AM – 12 PM", "12 PM – 2 PM", "2 PM – 4 PM", "4 PM – 6 PM"}
@@ -266,3 +272,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

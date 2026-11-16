@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
 import {
+  fetchGooglePhoto,
+  fetchGoogleReviews,
   processBookingRequest,
   purgeExpiredBookings,
   readAndValidatePhotos,
@@ -93,6 +95,70 @@ const valid = validateBookingFields(new Map([
 assert.equal(valid.ok, true, "valid booking details pass field validation");
 assert.equal(valid.value.preferredDate, "2027-01-12", "preferred date is retained");
 assert.equal(valid.value.preferredTime, "10 AM – 12 PM", "preferred time is retained");
+
+for (const packageName of [
+  "Enhance Interior Detail",
+  "Enhance Deep Interior Detail",
+  "Enhance Gold",
+  "Enhance Black Label",
+  "Enhance Ceramic Coating",
+  "Enhance Paint Correction",
+  "Enhance Showroom Edition — custom quote",
+  "Enhance Paint Protection — custom quote",
+  "Enhance Wheels, Glass & Exterior — custom quote",
+  "Enhance Interior Care — custom quote",
+]) {
+  const validPackage = validateBookingFields(new Map([
+    ["request_id", "11111111-1111-4111-8111-111111111111"], ["name", "Preview Customer"],
+    ["email", "preview@example.test"], ["phone", "5105550123"], ["location", "Alameda"],
+    ["vehicle", "2022 Preview SUV"], ["package", packageName],
+  ]));
+  assert.equal(validPackage.ok, true, `${packageName} is accepted by the booking backend`);
+}
+
+let noKeyFetches = 0;
+const unconfiguredReviews = await fetchGoogleReviews({}, async () => { noKeyFetches++; throw new Error("must not fetch without a key"); });
+assert.equal(unconfiguredReviews.status, 503, "live reviews remain disabled until a Google API secret is configured");
+assert.equal(noKeyFetches, 0, "unconfigured review service makes no external call");
+
+let placesHeaders;
+const placeName = "places/ChIJycCMkhJhCkoRHL89gmaro1g/photos/Abcdefghijklmnop1234";
+const googleFixture = {
+  rating: 4.8,
+  userRatingCount: 23,
+  googleMapsUri: "https://maps.google.com/?cid=123",
+  reviewsUri: "https://maps.google.com/reviews/123",
+  reviews: [{
+    rating: 5,
+    relativePublishTimeDescription: "2 weeks ago",
+    text: { text: "A fresh review from a test fixture." },
+    googleMapsUri: "https://www.google.com/maps/reviews/data=test",
+    authorAttribution: { displayName: "Review Author", uri: "https://www.google.com/maps/contrib/123", photoUri: "https://lh3.googleusercontent.com/a/test" },
+  }],
+  photos: [{ name: placeName, googleMapsUri: "https://www.google.com/maps/place/test", authorAttributions: [{ displayName: "Photo Author", uri: "https://www.google.com/maps/contrib/456", photoUri: "https://lh3.googleusercontent.com/a/photo" }] }],
+};
+const liveReviews = await fetchGoogleReviews({ GOOGLE_PLACES_API_KEY: "server-only-test-key" }, async (url, options) => {
+  assert.match(url, /^https:\/\/places\.googleapis\.com\/v1\/places\//);
+  placesHeaders = options.headers;
+  return new Response(JSON.stringify(googleFixture), { status: 200, headers: { "Content-Type": "application/json" } });
+});
+assert.equal(liveReviews.status, 200);
+assert.equal(liveReviews.body.rating, 4.8);
+assert.equal(liveReviews.body.reviewCount, 23);
+assert.equal(liveReviews.body.reviews[0].authorPhotoUri, "https://lh3.googleusercontent.com/a/test", "reviewer profile photo is carried through for attribution");
+assert.equal(liveReviews.body.reviews[0].sourceUri, "https://www.google.com/maps/reviews/data=test", "each review has a direct Google Maps source link");
+assert.equal(liveReviews.body.photos[0].authors[0].name, "Photo Author", "Google business photo attribution is carried through");
+assert.equal(placesHeaders["X-Goog-Api-Key"], "server-only-test-key", "Google API key is sent only from the Worker");
+assert.match(placesHeaders["X-Goog-FieldMask"], /reviews,photos/, "the request asks for reviews and business photos");
+
+const photoResponse = await fetchGooglePhoto(placeName, "320", { GOOGLE_PLACES_API_KEY: "server-only-test-key" }, async (url, options) => {
+  assert.match(url, /maxHeightPx=320/);
+  assert.equal(options.headers["X-Goog-Api-Key"], "server-only-test-key");
+  return new Response(new Uint8Array([0xff, 0xd8, 0xff]), { status: 200, headers: { "Content-Type": "image/jpeg" } });
+});
+assert.equal(photoResponse.ok, true, "business photos can be proxied without exposing a key");
+const invalidPhoto = await fetchGooglePhoto("places/another-business/photos/notmine", "320", { GOOGLE_PLACES_API_KEY: "server-only-test-key" });
+assert.equal(invalidPhoto.status, 400, "photo proxy rejects photo identifiers outside this business listing");
 
 const goodStore = new MemoryStore();
 const written = new Map();
@@ -206,4 +272,5 @@ const failedRetention = await purgeExpiredBookings(failedRetentionStore, {
 assert.equal(failedRetention.failed, 1, "R2 failures are recorded for retry on the next daily run");
 assert.equal(failedRetentionStore.bookings.length, 1, "booking data remains when photo deletion fails");
 
-console.log("Worker mock tests passed: booking validation, Turnstile, photo checks, R2 writes and 90-day retention, Resend notification, and idempotency.");
+console.log("Worker mock tests passed: booking validation and service allow-list, Google reviews/photo proxies, Turnstile, booking photo checks, R2 writes and 90-day retention, Resend notification, and idempotency.");
+

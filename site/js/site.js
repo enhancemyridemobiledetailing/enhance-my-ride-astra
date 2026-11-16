@@ -1,4 +1,19 @@
 (() => {
+  // Edit this one object only when an approved promotion is active.
+  const PROMOTION = Object.freeze({ active: false, message: '', href: '/index.html#request-form', linkText: 'Learn more' });
+  const promoBar = document.getElementById('promo-announcement');
+  if (PROMOTION.active && PROMOTION.message && promoBar) {
+    const promoMessage = document.getElementById('promo-message');
+    const promoLink = document.getElementById('promo-link');
+    if (promoMessage && promoLink) {
+      promoMessage.textContent = PROMOTION.message;
+      promoLink.href = PROMOTION.href;
+      promoLink.textContent = PROMOTION.linkText;
+      promoBar.hidden = false;
+      document.body.classList.add('has-promo');
+    }
+  }
+
   const bar = document.getElementById('bar');
   const nav = document.getElementById('main-nav');
   const menu = document.getElementById('menu-toggle');
@@ -21,6 +36,10 @@
     menu?.setAttribute('aria-expanded', 'false');
     menu?.setAttribute('aria-label', 'Open navigation');
     nav.classList.remove('open');
+  }));
+  nav?.querySelectorAll('.nav-dropdown-menu a').forEach(link => link.addEventListener('click', () => {
+    const dropdown = link.closest('details');
+    if (dropdown) dropdown.open = false;
   }));
 
   const allHeroFilms = [...document.querySelectorAll('.hero-film')];
@@ -94,6 +113,159 @@
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape') setAsk(false);
   });
+
+  const reviewGrid = document.getElementById('review-grid');
+  const reviewSummary = document.getElementById('review-summary');
+  const reviewStatus = document.getElementById('google-reviews-status');
+  const googlePhotosBlock = document.getElementById('google-photos-block');
+  const googlePhotoGrid = document.getElementById('google-photo-grid');
+  const safeHttps = value => {
+    try {
+      const url = new URL(value);
+      return url.protocol === 'https:' ? url.href : '';
+    } catch { return ''; }
+  };
+  const addText = (parent, tag, text, className = '') => {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    node.textContent = text;
+    parent.append(node);
+    return node;
+  };
+  function renderGoogleReviews(data) {
+    if (reviewSummary && (data.rating !== null || data.reviewCount !== null)) {
+      const rating = data.rating === null ? '' : `${Number(data.rating).toFixed(1)} / 5`;
+      const count = Number.isInteger(data.reviewCount) ? `${data.reviewCount.toLocaleString()} Google reviews` : 'Google reviews';
+      reviewSummary.replaceChildren();
+      addText(reviewSummary, 'span', [rating, count].filter(Boolean).join(' · '));
+      const link = document.createElement('a');
+      link.href = safeHttps(data.reviewsUri) || 'https://search.google.com/local/reviews?placeid=ChIJycCMkhJhCkoRHL89gmaro1g';
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.textContent = 'Google Maps';
+      link.setAttribute('translate', 'no');
+      reviewSummary.append(link);
+      reviewSummary.hidden = false;
+      const heroSummary = document.getElementById('google-summary');
+      if (heroSummary) {
+        heroSummary.textContent = `${rating} · ${count}`;
+        heroSummary.hidden = false;
+      }
+    }
+    if (Array.isArray(data.reviews) && data.reviews.length && reviewGrid) {
+      reviewGrid.replaceChildren();
+      for (const review of data.reviews) {
+        const card = document.createElement('blockquote');
+        card.className = 'review-live-card';
+        const authorLine = document.createElement('div');
+        authorLine.className = 'review-author';
+        if (review.authorPhotoUri && safeHttps(review.authorPhotoUri)) {
+          const avatar = document.createElement('img');
+          avatar.src = safeHttps(review.authorPhotoUri);
+          avatar.alt = `${review.author || 'Google reviewer'} profile photo`;
+          avatar.loading = 'lazy';
+          avatar.referrerPolicy = 'no-referrer';
+          avatar.onerror = () => {
+            const fallback = document.createElement('span');
+            fallback.className = 'review-avatar-fallback';
+            fallback.textContent = (review.author || 'G').trim().slice(0, 1).toUpperCase();
+            avatar.replaceWith(fallback);
+          };
+          authorLine.append(avatar);
+        } else {
+          const fallback = document.createElement('span');
+          fallback.className = 'review-avatar-fallback';
+          fallback.textContent = (review.author || 'G').trim().slice(0, 1).toUpperCase();
+          authorLine.append(fallback);
+        }
+        const authorWrap = document.createElement('span');
+        const authorUrl = safeHttps(review.authorUri);
+        if (authorUrl) {
+          const authorLink = document.createElement('a');
+          authorLink.href = authorUrl;
+          authorLink.target = '_blank';
+          authorLink.rel = 'noopener';
+          authorLink.textContent = review.author || 'Google Maps reviewer';
+          authorWrap.append(authorLink);
+        } else addText(authorWrap, 'span', review.author || 'Google Maps reviewer');
+        addText(authorWrap, 'small', review.date || 'Google Maps review');
+        authorLine.append(authorWrap);
+        const stars = document.createElement('span');
+        stars.className = 'review-stars';
+        const starsValue = Number.isFinite(Number(review.rating)) ? Math.round(Number(review.rating)) : 0;
+        stars.textContent = starsValue ? '★'.repeat(starsValue) : '';
+        stars.setAttribute('aria-label', starsValue ? `${starsValue} out of 5 stars` : 'Google review');
+        authorLine.append(stars);
+        card.append(authorLine);
+        addText(card, 'p', review.text || '');
+        const source = document.createElement('a');
+        source.className = 'review-source';
+        source.href = safeHttps(review.sourceUri) || 'https://search.google.com/local/reviews?placeid=ChIJycCMkhJhCkoRHL89gmaro1g';
+        source.target = '_blank';
+        source.rel = 'noopener';
+        source.textContent = 'View review on Google Maps';
+        source.setAttribute('translate', 'no');
+        card.append(source);
+        reviewGrid.append(card);
+      }
+    }
+    if (googlePhotosBlock && googlePhotoGrid && Array.isArray(data.photos) && data.photos.length) {
+      googlePhotoGrid.replaceChildren();
+      for (const photo of data.photos) {
+        if (!photo.name) continue;
+        const figure = document.createElement('figure');
+        figure.className = 'google-photo';
+        const sourceLink = document.createElement('a');
+        sourceLink.href = safeHttps(photo.sourceUri) || 'https://search.google.com/local/reviews?placeid=ChIJycCMkhJhCkoRHL89gmaro1g';
+        sourceLink.target = '_blank';
+        sourceLink.rel = 'noopener';
+        const image = document.createElement('img');
+        image.src = `/api/google-review-photo?name=${encodeURIComponent(photo.name)}&size=320`;
+        image.alt = 'Photo from the Enhance My Ride Google Maps business listing';
+        image.loading = 'lazy';
+        image.decoding = 'async';
+        image.referrerPolicy = 'no-referrer';
+        image.onerror = () => figure.remove();
+        sourceLink.append(image);
+        figure.append(sourceLink);
+        const caption = document.createElement('figcaption');
+        const authors = Array.isArray(photo.authors) ? photo.authors.filter(author => author.name) : [];
+        if (authors.length) {
+          authors.forEach((author, index) => {
+            if (index) caption.append(document.createTextNode(', '));
+            const credit = document.createElement('a');
+            const authorProfile = safeHttps(author.uri);
+            if (authorProfile) {
+              credit.href = authorProfile;
+              credit.target = '_blank';
+              credit.rel = 'noopener';
+            }
+            credit.textContent = author.name;
+            caption.append(credit);
+          });
+        } else caption.append(document.createTextNode('Photo contributor'));
+        const mapsLabel = document.createElement('a');
+        mapsLabel.href = sourceLink.href;
+        mapsLabel.target = '_blank';
+        mapsLabel.rel = 'noopener';
+        mapsLabel.textContent = 'Google Maps';
+        mapsLabel.setAttribute('translate', 'no');
+        caption.append(document.createTextNode(' · '), mapsLabel);
+        figure.append(caption);
+        googlePhotoGrid.append(figure);
+      }
+      googlePhotosBlock.hidden = false;
+    }
+    if (reviewStatus) reviewStatus.textContent = 'Google provides up to five reviews, ordered by relevance. Reviewer profile photos are shown when provided; business-listing photos are displayed separately with contributor credit.';
+  }
+  if (reviewGrid) {
+    fetch('/api/reviews', { headers: { Accept: 'application/json' }, cache: 'no-store' })
+      .then(async response => ({ response, data: await response.json().catch(() => null) }))
+      .then(({ response, data }) => {
+        if (response.ok && data?.ok === true && data.mode === 'live') renderGoogleReviews(data);
+      })
+      .catch(() => {});
+  }
 
   const form = document.getElementById('quote-form');
   const formNote = document.getElementById('form-note');
@@ -239,3 +411,4 @@
   const year = document.getElementById('year');
   if (year) year.textContent = String(new Date().getFullYear());
 })();
+

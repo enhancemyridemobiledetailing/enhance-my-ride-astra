@@ -1,8 +1,19 @@
 const OWNER_EMAIL = "info@enhancemyride.com";
+const GOOGLE_PLACE_ID = "ChIJycCMkhJhCkoRHL89gmaro1g";
 const PACKAGE_VALUES = new Set([
   "Enhance Gold",
   "Enhance Black Label",
   "Showroom Edition",
+  "Enhance Interior Detail",
+  "Enhance Deep Interior Detail",
+  "Enhance Gold Complete Detail",
+  "Enhance Black Label Detail",
+  "Enhance Ceramic Coating",
+  "Enhance Paint Correction",
+  "Enhance Showroom Edition — custom quote",
+  "Enhance Paint Protection — custom quote",
+  "Enhance Wheels, Glass & Exterior — custom quote",
+  "Enhance Interior Care — custom quote",
   "Specialty service — custom quote",
   "Not sure yet",
 ]);
@@ -31,7 +42,7 @@ const RETENTION_BATCH_SIZE = 100;
 
 const json = (body, status = 200, headers = {}) => new Response(JSON.stringify(body), {
   status,
-  headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store", ...headers },
+  headers: { "Content-Type": "application/json; charset=utf-8", ...NO_STORE_HEADERS, ...headers },
 });
 
 function isLoopback(hostname) {
@@ -102,6 +113,47 @@ export default {
       });
     }
 
+    if (url.pathname === "/api/reviews") {
+      if (request.method !== "GET") return json({ ok: false, error: "method_not_allowed" }, 405, { Allow: "GET" });
+      const origin = request.headers.get("Origin");
+      const headers = origin ? originHeaders(request, env, local) : {};
+      if (origin && !headers) return json({ ok: false, error: "origin_not_allowed" }, 403);
+      if (!env.GOOGLE_PLACES_API_KEY) return json({ ok: false, mode: "setup_required" }, 503, headers || {});
+      if (!env.BOOKINGS_DB || !env.RATE_LIMIT_SALT) return json({ ok: false, mode: "setup_required" }, 503, headers || {});
+      if (!await googleRequestAllowed(request, env, "reviews", Number(env.GOOGLE_REVIEWS_RATE_LIMIT_PER_HOUR) || 12)) {
+        return json({ ok: false, error: "temporarily_unavailable" }, 429, headers || {});
+      }
+      const result = await fetchGoogleReviews(env);
+      return json(result.body, result.status, headers || {});
+    }
+
+    if (url.pathname === "/api/google-review-photo") {
+      if (request.method !== "GET") return json({ ok: false, error: "method_not_allowed" }, 405, { Allow: "GET" });
+      const origin = request.headers.get("Origin");
+      const headers = origin ? originHeaders(request, env, local) : {};
+      if (origin && !headers) return json({ ok: false, error: "origin_not_allowed" }, 403);
+      if (!env.GOOGLE_PLACES_API_KEY) return json({ ok: false, error: "setup_required" }, 503, headers || {});
+      if (!env.BOOKINGS_DB || !env.RATE_LIMIT_SALT) return json({ ok: false, error: "setup_required" }, 503, headers || {});
+      if (!safeGooglePhotoName(url.searchParams.get("name"))) return json({ ok: false, error: "invalid_photo" }, 400, headers || {});
+      if (!await googleRequestAllowed(request, env, "review_photos", Number(env.GOOGLE_PHOTOS_RATE_LIMIT_PER_HOUR) || 30)) {
+        return json({ ok: false, error: "temporarily_unavailable" }, 429, headers || {});
+      }
+      const photo = await fetchGooglePhoto(url.searchParams.get("name"), url.searchParams.get("size"), env);
+      if (!photo.ok) return json({ ok: false, error: photo.error }, photo.status, headers || {});
+      return new Response(photo.body, {
+        status: 200,
+        headers: {
+          ...headers,
+          "Content-Type": photo.contentType,
+          "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+          "CDN-Cache-Control": "no-store",
+          "Surrogate-Control": "no-store",
+          "X-Content-Type-Options": "nosniff",
+          "Cross-Origin-Resource-Policy": "same-origin",
+        },
+      });
+    }
+
     if (url.pathname === "/api/bookings") {
       if (request.method === "OPTIONS") {
         const headers = originHeaders(request, env, local);
@@ -161,6 +213,135 @@ export default {
     if (env.RESEND_API_KEY && env.MAIL_FROM) ctx.waitUntil(retryPendingNotifications(store, env));
   },
 };
+
+const GOOGLE_REVIEW_FIELD_MASK = "id,displayName,rating,userRatingCount,reviews,photos,googleMapsUri,reviewsUri";
+const NO_STORE_HEADERS = { "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0", "CDN-Cache-Control": "no-store", "Surrogate-Control": "no-store", "Pragma": "no-cache", "Expires": "0" };
+
+async function googleRequestAllowed(request, env, scope, limit) {
+  if (!env.BOOKINGS_DB || !env.RATE_LIMIT_SALT) return false;
+  const ip = request.headers.get("CF-Connecting-IP") || "unknown-client";
+  const ipHash = await hashText(`${env.RATE_LIMIT_SALT}:google:${scope}:${ip}`);
+  const hourBucket = new Date(Math.floor(Date.now() / 3600000) * 3600000).toISOString();
+  return new D1BookingStore(env.BOOKINGS_DB).incrementRateLimit(`google:${ipHash}`, hourBucket, limit);
+}
+
+/** Fetch a fresh Places response on demand. Review and photo data is never persisted or cached. */
+export async function fetchGoogleReviews(env, fetchImpl = fetch) {
+  if (!env.GOOGLE_PLACES_API_KEY) return { status: 503, body: { ok: false, mode: "setup_required" } };
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 7000);
+  try {
+    const response = await fetchImpl(`https://places.googleapis.com/v1/places/${GOOGLE_PLACE_ID}`, {
+      headers: {
+        "X-Goog-Api-Key": env.GOOGLE_PLACES_API_KEY,
+        "X-Goog-FieldMask": GOOGLE_REVIEW_FIELD_MASK,
+        "Accept-Language": "en-US",
+      },
+      signal: controller.signal,
+    });
+    if (!response.ok) return { status: 502, body: { ok: false, mode: "unavailable" } };
+    const place = await response.json();
+    const fallbackPlaceUrl = `https://search.google.com/local/reviews?placeid=${GOOGLE_PLACE_ID}`;
+    const reviews = (Array.isArray(place.reviews) ? place.reviews : []).slice(0, 5).map(review => {
+      const author = review.authorAttribution || {};
+      return {
+        text: safeText(review.text?.text, 4000),
+        rating: Number.isFinite(Number(review.rating)) ? Math.min(5, Math.max(1, Number(review.rating))) : null,
+        date: safeText(review.relativePublishTimeDescription, 80),
+        author: safeText(author.displayName, 120) || "Google Maps reviewer",
+        authorUri: safeGoogleUrl(author.uri),
+        authorPhotoUri: safeHttpsUrl(author.photoUri),
+        sourceUri: safeGoogleUrl(review.googleMapsUri) || fallbackPlaceUrl,
+      };
+    }).filter(review => review.text);
+    const photos = (Array.isArray(place.photos) ? place.photos : []).slice(0, 4).map(photo => ({
+      name: safeGooglePhotoName(photo.name),
+      sourceUri: safeGoogleUrl(photo.googleMapsUri) || safeGoogleUrl(place.googleMapsUri) || fallbackPlaceUrl,
+      authors: (Array.isArray(photo.authorAttributions) ? photo.authorAttributions : []).slice(0, 3).map(author => ({
+        name: safeText(author.displayName, 120),
+        uri: safeGoogleUrl(author.uri),
+        photoUri: safeHttpsUrl(author.photoUri),
+      })),
+    })).filter(photo => photo.name);
+    return {
+      status: 200,
+      body: {
+        ok: true,
+        mode: "live",
+        rating: Number.isFinite(Number(place.rating)) ? Math.min(5, Math.max(0, Number(place.rating))) : null,
+        reviewCount: Number.isInteger(place.userRatingCount) ? place.userRatingCount : null,
+        reviews,
+        photos,
+        reviewsUri: safeGoogleUrl(place.reviewsUri) || fallbackPlaceUrl,
+        businessUri: safeGoogleUrl(place.googleMapsUri) || fallbackPlaceUrl,
+        orderedBy: "relevance",
+      },
+    };
+  } catch {
+    return { status: 502, body: { ok: false, mode: "unavailable" } };
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+/** Proxy a Places photo media response without exposing the server-side API key or caching its content. */
+export async function fetchGooglePhoto(name, size, env, fetchImpl = fetch) {
+  if (!env.GOOGLE_PLACES_API_KEY) return { ok: false, status: 503, error: "setup_required" };
+  const safeName = safeGooglePhotoName(name);
+  if (!safeName) return { ok: false, status: 400, error: "invalid_photo" };
+  const maxHeight = size === "320" ? 320 : 640;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 7000);
+  try {
+    const response = await fetchImpl(`https://places.googleapis.com/v1/${safeName}/media?maxHeightPx=${maxHeight}`, {
+      headers: { "X-Goog-Api-Key": env.GOOGLE_PLACES_API_KEY },
+      signal: controller.signal,
+    });
+    const contentType = (response.headers.get("Content-Type") || "").split(";")[0].toLowerCase();
+    const contentLength = Number(response.headers.get("Content-Length") || 0);
+    if (!response.ok || !["image/jpeg", "image/png", "image/webp", "image/avif"].includes(contentType) || (contentLength && contentLength > 4 * 1024 * 1024)) {
+      return { ok: false, status: 502, error: "photo_unavailable" };
+    }
+    const body = new Uint8Array(await response.arrayBuffer());
+    if (body.byteLength > 4 * 1024 * 1024) return { ok: false, status: 502, error: "photo_unavailable" };
+    return { ok: true, status: 200, contentType, body };
+  } catch {
+    return { ok: false, status: 502, error: "photo_unavailable" };
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+function safeGooglePhotoName(value) {
+  const name = typeof value === "string" ? value : "";
+  const prefix = `places/${GOOGLE_PLACE_ID}/photos/`;
+  const token = name.startsWith(prefix) ? name.slice(prefix.length) : "";
+  return token && /^[A-Za-z0-9_-]{8,512}$/.test(token) ? `${prefix}${token}` : "";
+}
+
+function safeText(value, maxLength) {
+  return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
+}
+
+function safeHttpsUrl(value) {
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" ? url.href : "";
+  } catch {
+    return "";
+  }
+}
+
+function safeGoogleUrl(value) {
+  const href = safeHttpsUrl(value);
+  if (!href) return "";
+  try {
+    const host = new URL(href).hostname.toLowerCase();
+    return host === "google.com" || host.endsWith(".google.com") || host === "maps.app.goo.gl" ? href : "";
+  } catch {
+    return "";
+  }
+}
 
 export async function processBookingRequest(request, dependencies) {
   const { env, store, isLocalMock, verifyTurnstile, writePhoto, deletePhoto, readPhoto, sendEmail } = dependencies;
@@ -548,3 +729,4 @@ async function retryPendingNotifications(store, env) {
     }
   }
 }
+

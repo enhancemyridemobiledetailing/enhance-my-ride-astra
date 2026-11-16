@@ -22,6 +22,11 @@ The business owner confirms that the detailing footage in that mockup is origina
 
 No icon library, JavaScript framework, stock photography, or other third-party visual asset is included. Arrows and separators use standard text characters. Google Reviews and social-network links are business integrations rather than bundled creative assets.
 
+## Optional live Google Maps review and photo content
+
+When activated, the site requests Places API (New) content at page-view time. Reviews, reviewer attribution/profile images, and separately returned business-listing photos are displayed with Google Maps source links and available contributor credits. This content is not bundled in the repository, committed, stored in D1/R2, or cached by the Worker. Google Maps text attribution is used in the compact review/photo cards. The API integration requires an owner-provided Cloudflare Worker secret (`GOOGLE_PLACES_API_KEY`) and a Google Cloud project with Places API (New) and billing enabled. Review and photo media calls may be billable; see the [official Places API policies](https://developers.google.com/maps/documentation/places/web-service/policies) and [current pricing](https://developers.google.com/maps/billing-and-pricing/pricing).
+
 ## Implementation
 
 Site HTML, CSS, and JavaScript were independently written for this repository. The reference site was used only to understand the requested general mood and content themes; its source code and proprietary site graphics, scripts, styles, logos, and promotional copy were not reused. The layout and panel composition were independently changed for this version.
+

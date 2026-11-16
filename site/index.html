@@ -3,537 +3,158 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="robots" content="noindex,nofollow">
-  <meta name="description" content="Premium mobile detailing at your home or workplace in Alameda and the San Francisco Bay Area, within 40 miles. Enhance My Ride brings its own water and power.">
-  <meta name="theme-color" content="#070707">
-  <title>Mobile Detailing in Alameda, CA | Enhance My Ride</title>
-  <link rel="icon" type="image/png" href="assets/brand/favicon.png">
+  <meta name="description" content="Premium mobile detailing based in Alameda, serving Alameda, Contra Costa, Marin, Napa, San Francisco, San Mateo, Santa Clara, Solano and Sonoma counties. We bring our own water and power.">
+  <meta name="theme-color" content="#080807">
+  <link rel="canonical" href="https://enhancemyride.com/">
+  <title>Premium Mobile Detailing Across the Bay Area | Enhance My Ride</title>
+  <link rel="icon" type="image/png" href="/assets/brand/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,600;1,700;1,800;1,900&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/site.css?v=hero-overlay-2">
+  <link rel="stylesheet" href="/css/site.css">
+  <link rel="stylesheet" href="/css/redesign.css">
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
-    "@type":"AutoRepair",
+    "@type":"AutomotiveBusiness",
     "name":"Enhance My Ride Auto Spa & Mobile Detailing",
+    "url":"https://enhancemyride.com/",
+    "logo":"https://enhancemyride.com/assets/brand/logo.webp",
+    "image":"https://enhancemyride.com/assets/film/foam.jpg",
     "telephone":"+1-323-327-1806",
     "email":"info@enhancemyride.com",
     "address":{"@type":"PostalAddress","addressLocality":"Alameda","addressRegion":"CA","addressCountry":"US"},
-    "areaServed":["Alameda","Oakland","Berkeley","San Leandro","Emeryville","Hayward","San Francisco","San Francisco Bay Area"],
-    "description":"Premium mobile auto detailing based in Alameda, California. Serving suitable home and workplace locations within 40 miles."
+    "areaServed":[
+      {"@type":"AdministrativeArea","name":"Alameda County, California"},
+      {"@type":"AdministrativeArea","name":"Contra Costa County, California"},
+      {"@type":"AdministrativeArea","name":"Marin County, California"},
+      {"@type":"AdministrativeArea","name":"Napa County, California"},
+      {"@type":"AdministrativeArea","name":"San Francisco County, California"},
+      {"@type":"AdministrativeArea","name":"San Mateo County, California"},
+      {"@type":"AdministrativeArea","name":"Santa Clara County, California"},
+      {"@type":"AdministrativeArea","name":"Solano County, California"},
+      {"@type":"AdministrativeArea","name":"Sonoma County, California"}
+    ],
+    "description":"Premium self-contained mobile auto detailing based in Alameda, California. Serving suitable residential and workplace locations throughout the nine San Francisco Bay Area counties. The team brings its own water and power."
   }
   </script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
+  <div class="announcement" id="promo-announcement" hidden aria-live="polite"><span id="promo-message"></span><a id="promo-link" href="#request-form">Learn more</a></div>
   <header class="bar" id="bar">
-    <a class="brand" href="#top" aria-label="Enhance My Ride, back to the top">
-      <img src="assets/brand/logo.webp" width="48" height="48" alt="">
+    <a class="brand" href="/" aria-label="Enhance My Ride home">
+      <img src="/assets/brand/logo.webp" width="48" height="48" alt="">
       <span class="brand-word">Enhance My Ride</span>
     </a>
     <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open navigation"><span></span><span></span><span></span></button>
     <nav class="nav" id="main-nav" aria-label="Main navigation">
-      <a href="#work">The work</a><a href="#rig">The rig</a><a href="#packages">Packages</a><a href="#reviews">Reviews</a><a href="#area">Area</a>
+      <a href="/">Home</a>
+      <details class="nav-dropdown"><summary>Services <span aria-hidden="true">⌄</span></summary><div class="nav-dropdown-menu"><a href="/services.html#packages">Detailing packages</a><a href="/services.html#coatings">Ceramic coating</a><a href="/services.html#correction">Paint correction</a><a href="/services.html#specialty">Specialty services</a></div></details>
+      <a href="/gallery.html">Our work</a>
+      <a href="/#reviews">Reviews</a>
+      <a href="/about.html">About</a>
+      <a href="/service-area.html">Service area</a>
     </nav>
-    <a class="button gold bar-book" href="#request-form">Book your detail</a>
+    <a class="button gold bar-book" href="/#request-form">Get a quote</a>
   </header>
 
   <main id="main">
-    <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="triptych" aria-label="Enhance My Ride detailing films">
-        <figure class="panel panel-foam">
-          <video class="hero-film" muted playsinline loop preload="none" poster="assets/film/foam.jpg" data-src="assets/film/foam.mp4" aria-label="White SUV covered in foam during a pre-wash"></video>
-          <figcaption class="panel-tag"><span>01</span><b>Foam first</b></figcaption>
-        </figure>
-        <figure class="panel panel-wheel">
-          <video class="hero-film" muted playsinline loop preload="none" poster="assets/film/rinse.jpg" data-src="assets/film/rinse.mp4" aria-label="Close-up of a foamy wheel being safely washed"></video>
-          <figcaption class="panel-tag"><span>02</span><b>Safe pre-wash</b></figcaption>
-        </figure>
-        <figure class="panel panel-finish">
-          <video class="hero-film" muted playsinline loop preload="none" poster="assets/film/finish.jpg" data-src="assets/film/finish.mp4" aria-label="Mercedes G-Wagon after detailing"></video>
-          <figcaption class="panel-tag"><span>03</span><b>Finish flawless</b></figcaption>
-        </figure>
-      </div>
-      <div class="portrait-film" aria-hidden="true"><video class="hero-film" muted playsinline loop preload="none" poster="assets/film/hero-phone.jpg" data-src="assets/film/hero-phone.mp4"></video></div>
+    <section class="hero hero-single" id="top" aria-labelledby="hero-title">
+      <video class="hero-film" muted playsinline loop autoplay preload="none" poster="/assets/film/foam.jpg" data-src="/assets/film/hero-phone.mp4" aria-label="Enhance My Ride mobile detailing footage"></video>
       <div class="hero-shade" aria-hidden="true"></div>
-      <div class="hero-copy">
-        <p class="hero-kicker">Mobile detailing · Alameda &amp; the San Francisco Bay Area</p>
-        <h1 class="hero-title" id="hero-title"><span>We come to you.</span><span>You relax. <strong>We Enhance.</strong></span></h1>
-        <p class="hero-support">Premium care at home or work. We bring our own water and power.</p>
+      <div class="hero-copy hero-copy-center">
+        <img class="hero-logo" src="/assets/brand/logo.webp" width="96" height="96" alt="Enhance My Ride logo">
+        <p class="hero-kicker">Alameda · Serving all nine Bay Area counties</p>
+        <p class="hero-rating" id="google-summary" hidden></p>
+        <h1 class="hero-title" id="hero-title"><span>Premium mobile</span><span>detailing.</span></h1>
+        <p class="hero-support">Professional vehicle care at your home or workplace. We bring our own water and power.</p>
         <div class="hero-actions">
-          <a class="button gold" href="#request-form">Book your detail</a>
-          <a class="button line hero-explore" href="#packages">Explore services</a>
-          <a class="hero-phone" href="tel:+13233271806">Call (323) 327-1806</a>
+          <a class="button gold" href="#request-form">Request your detail</a>
+          <a class="button line" href="#packages">View services</a>
         </div>
+        <a class="hero-phone" href="tel:+13233271806">Call (323) 327-1806</a>
       </div>
+      <a class="hero-scroll" href="#intro" aria-label="Scroll to learn more"><span aria-hidden="true">↓</span></a>
     </section>
 
-    <section class="proof section-pad" aria-label="The Enhance experience">
-      <div class="proof-quote"><p>“I am convinced Raheim has superpowers. My car was basically a second home for my dogs… Not one hair in sight!”</p><footer>Amber U. · Google review</footer></div>
-      <div class="proof-score"><p class="score-num">5.0</p><div><div class="stars" aria-label="5 stars">★★★★★</div><p class="muted">Google rating</p></div></div>
-      <p class="proof-copy">Premium mobile detailing at your home or workplace. We bring the water, power, equipment and products, so your day can carry on.</p>
-    </section>
-
-    <section class="work section-pad" id="work" aria-labelledby="work-title">
-      <div class="section-head"><div><p class="eyebrow">Selected vehicles</p><h2 id="work-title">Every detail.<br><span class="gold-type">Every transformation.</span></h2></div><a class="text-link" href="#completed-work">Explore the work <span aria-hidden="true">↗</span></a></div>
-      <p class="section-lead">A look at vehicles enhanced at the places our customers live and work.</p>
-
-      <div class="gallery-block before-after" aria-labelledby="before-after-title">
-        <div class="gallery-subhead">
-          <div><p class="eyebrow">Before &amp; after</p><h3 id="before-after-title">Verified transformations</h3></div>
-          <p class="gallery-note">Pairs are shown together only where the photos confirm the same vehicle and view.</p>
-        </div>
-        <section class="comparison-group" aria-label="Mercedes-Benz before and after work">
-          <div class="work-group-head"><h4>Mercedes-Benz</h4></div>
-          <div class="comparison-grid">
-          <article class="comparison-card">
-            <h4>Mercedes-Benz · Front exterior</h4>
-            <div class="comparison-images">
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">BEFORE</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/mercedes/mercedes-before-front.webp" data-alt="Mercedes-Benz — before — front exterior." data-caption="Mercedes-Benz · BEFORE · Front exterior" aria-label="View full-size before photo: Mercedes-Benz, Front exterior">
-                  <img src="assets/work/collections/mercedes/mercedes-before-front.webp" alt="Mercedes-Benz — before — front exterior." loading="lazy" decoding="async">
-                </button>
-              </figure>
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">AFTER</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/mercedes/mercedes-after-front.webp" data-alt="Mercedes-Benz — after — front exterior." data-caption="Mercedes-Benz · AFTER · Front exterior" aria-label="View full-size after photo: Mercedes-Benz, Front exterior">
-                  <img src="assets/work/collections/mercedes/mercedes-after-front.webp" alt="Mercedes-Benz — after — front exterior." loading="lazy" decoding="async">
-                </button>
-              </figure>
-            </div>
-          </article>
-          <article class="comparison-card">
-            <h4>Mercedes-Benz · Interior</h4>
-            <div class="comparison-images">
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">BEFORE</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/mercedes/mercedes-before-interior.webp" data-alt="Mercedes-Benz — before — interior." data-caption="Mercedes-Benz · BEFORE · Interior" aria-label="View full-size before photo: Mercedes-Benz, Interior">
-                  <img src="assets/work/collections/mercedes/mercedes-before-interior.webp" alt="Mercedes-Benz — before — interior." loading="lazy" decoding="async">
-                </button>
-              </figure>
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">AFTER</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/mercedes/mercedes-after-interior.webp" data-alt="Mercedes-Benz — after — interior." data-caption="Mercedes-Benz · AFTER · Interior" aria-label="View full-size after photo: Mercedes-Benz, Interior">
-                  <img src="assets/work/collections/mercedes/mercedes-after-interior.webp" alt="Mercedes-Benz — after — interior." loading="lazy" decoding="async">
-                </button>
-              </figure>
-            </div>
-          </article>
-          <article class="comparison-card">
-            <h4>Mercedes-Benz · Passenger footwell</h4>
-            <div class="comparison-images">
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">BEFORE</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/mercedes/mercedes-before-passenger-footwell.webp" data-alt="Mercedes-Benz — before — passenger footwell." data-caption="Mercedes-Benz · BEFORE · Passenger footwell" aria-label="View full-size before photo: Mercedes-Benz, Passenger footwell">
-                  <img src="assets/work/collections/mercedes/mercedes-before-passenger-footwell.webp" alt="Mercedes-Benz — before — passenger footwell." loading="lazy" decoding="async">
-                </button>
-              </figure>
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">AFTER</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/mercedes/mercedes-after-passenger-footwell.webp" data-alt="Mercedes-Benz — after — passenger footwell." data-caption="Mercedes-Benz · AFTER · Passenger footwell" aria-label="View full-size after photo: Mercedes-Benz, Passenger footwell">
-                  <img src="assets/work/collections/mercedes/mercedes-after-passenger-footwell.webp" alt="Mercedes-Benz — after — passenger footwell." loading="lazy" decoding="async">
-                </button>
-              </figure>
-            </div>
-          </article>
-          <article class="comparison-card">
-            <h4>Mercedes-Benz · Rear exterior</h4>
-            <div class="comparison-images">
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">BEFORE</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/mercedes/mercedes-before-rear.webp" data-alt="Mercedes-Benz — before — rear exterior." data-caption="Mercedes-Benz · BEFORE · Rear exterior" aria-label="View full-size before photo: Mercedes-Benz, Rear exterior">
-                  <img src="assets/work/collections/mercedes/mercedes-before-rear.webp" alt="Mercedes-Benz — before — rear exterior." loading="lazy" decoding="async">
-                </button>
-              </figure>
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">AFTER</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/mercedes/mercedes-after-rear.webp" data-alt="Mercedes-Benz — after — rear exterior." data-caption="Mercedes-Benz · AFTER · Rear exterior" aria-label="View full-size after photo: Mercedes-Benz, Rear exterior">
-                  <img src="assets/work/collections/mercedes/mercedes-after-rear.webp" alt="Mercedes-Benz — after — rear exterior." loading="lazy" decoding="async">
-                </button>
-              </figure>
-            </div>
-          </article>
-          <article class="comparison-card">
-            <h4>Mercedes-Benz · Trunk</h4>
-            <div class="comparison-images">
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">BEFORE</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/mercedes/mercedes-before-trunk.webp" data-alt="Mercedes-Benz — before — trunk." data-caption="Mercedes-Benz · BEFORE · Trunk" aria-label="View full-size before photo: Mercedes-Benz, Trunk">
-                  <img src="assets/work/collections/mercedes/mercedes-before-trunk.webp" alt="Mercedes-Benz — before — trunk." loading="lazy" decoding="async">
-                </button>
-              </figure>
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">AFTER</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/mercedes/mercedes-after-trunk.webp" data-alt="Mercedes-Benz — after — trunk." data-caption="Mercedes-Benz · AFTER · Trunk" aria-label="View full-size after photo: Mercedes-Benz, Trunk">
-                  <img src="assets/work/collections/mercedes/mercedes-after-trunk.webp" alt="Mercedes-Benz — after — trunk." loading="lazy" decoding="async">
-                </button>
-              </figure>
-            </div>
-          </article>
-          <article class="comparison-card">
-            <h4>Mercedes-Benz · Wheel</h4>
-            <div class="comparison-images">
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">BEFORE</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/mercedes/mercedes-before-wheel.webp" data-alt="Mercedes-Benz — before — wheel." data-caption="Mercedes-Benz · BEFORE · Wheel" aria-label="View full-size before photo: Mercedes-Benz, Wheel">
-                  <img src="assets/work/collections/mercedes/mercedes-before-wheel.webp" alt="Mercedes-Benz — before — wheel." loading="lazy" decoding="async">
-                </button>
-              </figure>
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">AFTER</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/mercedes/mercedes-after-wheel.webp" data-alt="Mercedes-Benz — after — wheel." data-caption="Mercedes-Benz · AFTER · Wheel" aria-label="View full-size after photo: Mercedes-Benz, Wheel">
-                  <img src="assets/work/collections/mercedes/mercedes-after-wheel.webp" alt="Mercedes-Benz — after — wheel." loading="lazy" decoding="async">
-                </button>
-              </figure>
-            </div>
-          </article>
-          </div>
-        </section>
-        <section class="comparison-group" aria-label="Lexus IS 250 before and after work">
-          <div class="work-group-head"><h4>Lexus IS 250</h4></div>
-          <div class="comparison-grid">
-          <article class="comparison-card">
-            <h4>Lexus IS 250 · Center console</h4>
-            <div class="comparison-images">
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">BEFORE</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/lexus/lexus-is250-before-center-console.webp" data-alt="Lexus IS 250 — before — center console." data-caption="Lexus IS 250 · BEFORE · Center console" aria-label="View full-size before photo: Lexus IS 250, Center console">
-                  <img src="assets/work/collections/lexus/lexus-is250-before-center-console.webp" alt="Lexus IS 250 — before — center console." loading="lazy" decoding="async">
-                </button>
-              </figure>
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">AFTER</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/lexus/lexus-is250-after-center-console.webp" data-alt="Lexus IS 250 — after — center console." data-caption="Lexus IS 250 · AFTER · Center console" aria-label="View full-size after photo: Lexus IS 250, Center console">
-                  <img src="assets/work/collections/lexus/lexus-is250-after-center-console.webp" alt="Lexus IS 250 — after — center console." loading="lazy" decoding="async">
-                </button>
-              </figure>
-            </div>
-          </article>
-          <article class="comparison-card">
-            <h4>Lexus IS 250 · Dashboard</h4>
-            <div class="comparison-images">
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">BEFORE</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/lexus/lexus-is250-before-dashboard.webp" data-alt="Lexus IS 250 — before — dashboard." data-caption="Lexus IS 250 · BEFORE · Dashboard" aria-label="View full-size before photo: Lexus IS 250, Dashboard">
-                  <img src="assets/work/collections/lexus/lexus-is250-before-dashboard.webp" alt="Lexus IS 250 — before — dashboard." loading="lazy" decoding="async">
-                </button>
-              </figure>
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">AFTER</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/lexus/lexus-is250-after-dashboard.webp" data-alt="Lexus IS 250 — after — dashboard." data-caption="Lexus IS 250 · AFTER · Dashboard" aria-label="View full-size after photo: Lexus IS 250, Dashboard">
-                  <img src="assets/work/collections/lexus/lexus-is250-after-dashboard.webp" alt="Lexus IS 250 — after — dashboard." loading="lazy" decoding="async">
-                </button>
-              </figure>
-            </div>
-          </article>
-          <article class="comparison-card">
-            <h4>Lexus IS 250 · Driver interior</h4>
-            <div class="comparison-images">
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">BEFORE</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/lexus/lexus-is250-before-driver-interior.webp" data-alt="Lexus IS 250 — before — driver interior." data-caption="Lexus IS 250 · BEFORE · Driver interior" aria-label="View full-size before photo: Lexus IS 250, Driver interior">
-                  <img src="assets/work/collections/lexus/lexus-is250-before-driver-interior.webp" alt="Lexus IS 250 — before — driver interior." loading="lazy" decoding="async">
-                </button>
-              </figure>
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">AFTER</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/lexus/lexus-is250-after-driver-interior.webp" data-alt="Lexus IS 250 — after — driver interior." data-caption="Lexus IS 250 · AFTER · Driver interior" aria-label="View full-size after photo: Lexus IS 250, Driver interior">
-                  <img src="assets/work/collections/lexus/lexus-is250-after-driver-interior.webp" alt="Lexus IS 250 — after — driver interior." loading="lazy" decoding="async">
-                </button>
-              </figure>
-            </div>
-          </article>
-          <article class="comparison-card">
-            <h4>Lexus IS 250 · Front passenger interior</h4>
-            <div class="comparison-images">
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">BEFORE</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/lexus/lexus-is250-before-front-passenger-interior.webp" data-alt="Lexus IS 250 — before — front passenger interior." data-caption="Lexus IS 250 · BEFORE · Front passenger interior" aria-label="View full-size before photo: Lexus IS 250, Front passenger interior">
-                  <img src="assets/work/collections/lexus/lexus-is250-before-front-passenger-interior.webp" alt="Lexus IS 250 — before — front passenger interior." loading="lazy" decoding="async">
-                </button>
-              </figure>
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">AFTER</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/lexus/lexus-is250-after-front-passenger-interior.webp" data-alt="Lexus IS 250 — after — front passenger interior." data-caption="Lexus IS 250 · AFTER · Front passenger interior" aria-label="View full-size after photo: Lexus IS 250, Front passenger interior">
-                  <img src="assets/work/collections/lexus/lexus-is250-after-front-passenger-interior.webp" alt="Lexus IS 250 — after — front passenger interior." loading="lazy" decoding="async">
-                </button>
-              </figure>
-            </div>
-          </article>
-          <article class="comparison-card">
-            <h4>Lexus IS 250 · Front three-quarter exterior</h4>
-            <div class="comparison-images">
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">BEFORE</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/lexus/lexus-is250-before-front-three-quarter.webp" data-alt="Lexus IS 250 — before — front three-quarter exterior." data-caption="Lexus IS 250 · BEFORE · Front three-quarter exterior" aria-label="View full-size before photo: Lexus IS 250, Front three-quarter exterior">
-                  <img src="assets/work/collections/lexus/lexus-is250-before-front-three-quarter.webp" alt="Lexus IS 250 — before — front three-quarter exterior." loading="lazy" decoding="async">
-                </button>
-              </figure>
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">AFTER</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/lexus/lexus-is250-after-front-three-quarter.webp" data-alt="Lexus IS 250 — after — front three-quarter exterior." data-caption="Lexus IS 250 · AFTER · Front three-quarter exterior" aria-label="View full-size after photo: Lexus IS 250, Front three-quarter exterior">
-                  <img src="assets/work/collections/lexus/lexus-is250-after-front-three-quarter.webp" alt="Lexus IS 250 — after — front three-quarter exterior." loading="lazy" decoding="async">
-                </button>
-              </figure>
-            </div>
-          </article>
-          <article class="comparison-card">
-            <h4>Lexus IS 250 · Front exterior</h4>
-            <div class="comparison-images">
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">BEFORE</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/lexus/lexus-is250-before-front.webp" data-alt="Lexus IS 250 — before — front exterior." data-caption="Lexus IS 250 · BEFORE · Front exterior" aria-label="View full-size before photo: Lexus IS 250, Front exterior">
-                  <img src="assets/work/collections/lexus/lexus-is250-before-front.webp" alt="Lexus IS 250 — before — front exterior." loading="lazy" decoding="async">
-                </button>
-              </figure>
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">AFTER</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/lexus/lexus-is250-after-front.webp" data-alt="Lexus IS 250 — after — front exterior." data-caption="Lexus IS 250 · AFTER · Front exterior" aria-label="View full-size after photo: Lexus IS 250, Front exterior">
-                  <img src="assets/work/collections/lexus/lexus-is250-after-front.webp" alt="Lexus IS 250 — after — front exterior." loading="lazy" decoding="async">
-                </button>
-              </figure>
-            </div>
-          </article>
-          <article class="comparison-card">
-            <h4>Lexus IS 250 · Rear seat</h4>
-            <div class="comparison-images">
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">BEFORE</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/lexus/lexus-is250-before-rear-seat.webp" data-alt="Lexus IS 250 — before — rear seat." data-caption="Lexus IS 250 · BEFORE · Rear seat" aria-label="View full-size before photo: Lexus IS 250, Rear seat">
-                  <img src="assets/work/collections/lexus/lexus-is250-before-rear-seat.webp" alt="Lexus IS 250 — before — rear seat." loading="lazy" decoding="async">
-                </button>
-              </figure>
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">AFTER</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/lexus/lexus-is250-after-rear-seat.webp" data-alt="Lexus IS 250 — after — rear seat." data-caption="Lexus IS 250 · AFTER · Rear seat" aria-label="View full-size after photo: Lexus IS 250, Rear seat">
-                  <img src="assets/work/collections/lexus/lexus-is250-after-rear-seat.webp" alt="Lexus IS 250 — after — rear seat." loading="lazy" decoding="async">
-                </button>
-              </figure>
-            </div>
-          </article>
-          <article class="comparison-card">
-            <h4>Lexus IS 250 · Rear three-quarter exterior</h4>
-            <div class="comparison-images">
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">BEFORE</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/lexus/lexus-is250-before-rear-three-quarter.webp" data-alt="Lexus IS 250 — before — rear three-quarter exterior." data-caption="Lexus IS 250 · BEFORE · Rear three-quarter exterior" aria-label="View full-size before photo: Lexus IS 250, Rear three-quarter exterior">
-                  <img src="assets/work/collections/lexus/lexus-is250-before-rear-three-quarter.webp" alt="Lexus IS 250 — before — rear three-quarter exterior." loading="lazy" decoding="async">
-                </button>
-              </figure>
-              <figure class="comparison-shot">
-                <figcaption class="comparison-label">AFTER</figcaption>
-                <button class="work-card comparison-photo" type="button" data-image="assets/work/collections/lexus/lexus-is250-after-rear-three-quarter.webp" data-alt="Lexus IS 250 — after — rear three-quarter exterior." data-caption="Lexus IS 250 · AFTER · Rear three-quarter exterior" aria-label="View full-size after photo: Lexus IS 250, Rear three-quarter exterior">
-                  <img src="assets/work/collections/lexus/lexus-is250-after-rear-three-quarter.webp" alt="Lexus IS 250 — after — rear three-quarter exterior." loading="lazy" decoding="async">
-                </button>
-              </figure>
-            </div>
-          </article>
-          </div>
-        </section>
-      </div>
-
-      <div class="gallery-block completed-work" id="completed-work" aria-labelledby="completed-work-title">
-        <div class="gallery-subhead">
-          <div><p class="eyebrow">Completed work</p><h3 id="completed-work-title">Detailing portfolio</h3></div>
-          <p class="gallery-note">Standalone photos are grouped by the vehicle or work shown. Select a photo to view it full size.</p>
-        </div>
-        <section class="work-group" aria-label="Cadillac Escalade completed work">
-          <div class="work-group-head"><h4>Cadillac Escalade</h4></div>
-          <div class="completed-work-grid">
-          <button class="work-card" type="button" data-image="assets/work/original/IMG_4890.webp" data-alt="Cadillac Escalade — Exterior detail · front view." data-caption="Cadillac Escalade · Exterior detail · front view" aria-label="View full-size photo: Cadillac Escalade, Exterior detail · front view">
-            <img src="assets/work/IMG_4890.jpg" alt="Cadillac Escalade — Exterior detail · front view." loading="lazy" decoding="async">
-            <span class="work-caption"><b>CADILLAC ESCALADE</b><small>Exterior detail · front view</small></span>
-          </button>
-          </div>
-        </section>
-        <section class="work-group" aria-label="Dodge Durango completed work">
-          <div class="work-group-head"><h4>Dodge Durango</h4></div>
-          <div class="completed-work-grid">
-          <button class="work-card" type="button" data-image="assets/work/original/IMG_3235.webp" data-alt="Dodge Durango — Black SUV exterior view." data-caption="Dodge Durango · Black SUV exterior view" aria-label="View full-size photo: Dodge Durango, Black SUV exterior view">
-            <img src="assets/work/original/IMG_3235.webp" alt="Dodge Durango — Black SUV exterior view." loading="lazy" decoding="async">
-            <span class="work-caption"><b>DODGE DURANGO</b><small>Black SUV exterior view</small></span>
-          </button>
-          </div>
-        </section>
-        <section class="work-group" aria-label="Kia Soul completed work">
-          <div class="work-group-head"><h4>Kia Soul</h4></div>
-          <div class="completed-work-grid">
-          <button class="work-card" type="button" data-image="assets/work/original/IMG_3555.webp" data-alt="Kia Soul — Engine bay view." data-caption="Kia Soul · Engine bay view" aria-label="View full-size photo: Kia Soul, Engine bay view">
-            <img src="assets/work/IMG_3555.jpg" alt="Kia Soul — Engine bay view." loading="lazy" decoding="async">
-            <span class="work-caption"><b>KIA SOUL</b><small>Engine bay view</small></span>
-          </button>
-          <button class="work-card" type="button" data-image="assets/work/original/IMG_3601.webp" data-alt="Kia Soul — White front exterior view." data-caption="Kia Soul · White front exterior view" aria-label="View full-size photo: Kia Soul, White front exterior view">
-            <img src="assets/work/original/IMG_3601.webp" alt="Kia Soul — White front exterior view." loading="lazy" decoding="async">
-            <span class="work-caption"><b>KIA SOUL</b><small>White front exterior view</small></span>
-          </button>
-          <button class="work-card" type="button" data-image="assets/work/original/IMG_3609.webp" data-alt="Kia Soul — Interior cabin view." data-caption="Kia Soul · Interior cabin view" aria-label="View full-size photo: Kia Soul, Interior cabin view">
-            <img src="assets/work/original/IMG_3609.webp" alt="Kia Soul — Interior cabin view." loading="lazy" decoding="async">
-            <span class="work-caption"><b>KIA SOUL</b><small>Interior cabin view</small></span>
-          </button>
-          </div>
-        </section>
-        <section class="work-group" aria-label="Land Rover Defender completed work">
-          <div class="work-group-head"><h4>Land Rover Defender</h4></div>
-          <div class="completed-work-grid">
-          <button class="work-card" type="button" data-image="assets/work/original/IMG_4600.webp" data-alt="Land Rover Defender — Dark gray SUV front view." data-caption="Land Rover Defender · Dark gray SUV front view" aria-label="View full-size photo: Land Rover Defender, Dark gray SUV front view">
-            <img src="assets/work/original/IMG_4600.webp" alt="Land Rover Defender — Dark gray SUV front view." loading="lazy" decoding="async">
-            <span class="work-caption"><b>LAND ROVER DEFENDER</b><small>Dark gray SUV front view</small></span>
-          </button>
-          </div>
-        </section>
-        <section class="work-group" aria-label="Lexus details completed work">
-          <div class="work-group-head"><h4>Lexus details</h4></div>
-          <div class="completed-work-grid">
-          <button class="work-card" type="button" data-image="assets/work/original/IMG_4952.webp" data-alt="Lexus SUV — Foam-covered exterior pre-wash." data-caption="Lexus SUV · Foam-covered exterior pre-wash" aria-label="View full-size photo: Lexus SUV, Foam-covered exterior pre-wash">
-            <img src="assets/work/original/IMG_4952.webp" alt="Lexus SUV — Foam-covered exterior pre-wash." loading="lazy" decoding="async">
-            <span class="work-caption"><b>LEXUS SUV</b><small>Foam-covered exterior pre-wash</small></span>
-          </button>
-          <button class="work-card" type="button" data-image="assets/work/original/IMG_4953.webp" data-alt="Lexus — Tan leather interior view." data-caption="Lexus · Tan leather interior view" aria-label="View full-size photo: Lexus, Tan leather interior view">
-            <img src="assets/work/original/IMG_4953.webp" alt="Lexus — Tan leather interior view." loading="lazy" decoding="async">
-            <span class="work-caption"><b>LEXUS</b><small>Tan leather interior view</small></span>
-          </button>
-          </div>
-        </section>
-        <section class="work-group" aria-label="Lucid Air completed work">
-          <div class="work-group-head"><h4>Lucid Air</h4></div>
-          <div class="completed-work-grid">
-          <button class="work-card" type="button" data-image="assets/work/original/IMG_4876.webp" data-alt="Lucid Air — Silver exterior view." data-caption="Lucid Air · Silver exterior view" aria-label="View full-size photo: Lucid Air, Silver exterior view">
-            <img src="assets/work/IMG_4876.jpg" alt="Lucid Air — Silver exterior view." loading="lazy" decoding="async">
-            <span class="work-caption"><b>LUCID AIR</b><small>Silver exterior view</small></span>
-          </button>
-          <button class="work-card" type="button" data-image="assets/work/original/IMG_4880.webp" data-alt="Lucid Air — Rear quarter and wheel view." data-caption="Lucid Air · Rear quarter and wheel view" aria-label="View full-size photo: Lucid Air, Rear quarter and wheel view">
-            <img src="assets/work/original/IMG_4880.webp" alt="Lucid Air — Rear quarter and wheel view." loading="lazy" decoding="async">
-            <span class="work-caption"><b>LUCID AIR</b><small>Rear quarter and wheel view</small></span>
-          </button>
-          </div>
-        </section>
-        <section class="work-group" aria-label="Mercedes G-Wagon completed work">
-          <div class="work-group-head"><h4>Mercedes G-Wagon</h4></div>
-          <div class="completed-work-grid">
-          <button class="work-card" type="button" data-image="assets/work/original/IMG_4584.webp" data-alt="Mercedes G-Wagon — Matte gray front exterior view." data-caption="Mercedes G-Wagon · Matte gray front exterior view" aria-label="View full-size photo: Mercedes G-Wagon, Matte gray front exterior view">
-            <img src="assets/work/IMG_4584.jpg" alt="Mercedes G-Wagon — Matte gray front exterior view." loading="lazy" decoding="async">
-            <span class="work-caption"><b>MERCEDES G-WAGON</b><small>Matte gray front exterior view</small></span>
-          </button>
-          <button class="work-card" type="button" data-image="assets/work/original/IMG_4587.webp" data-alt="Mercedes G-Wagon — Gray SUV side view." data-caption="Mercedes G-Wagon · Gray SUV side view" aria-label="View full-size photo: Mercedes G-Wagon, Gray SUV side view">
-            <img src="assets/work/original/IMG_4587.webp" alt="Mercedes G-Wagon — Gray SUV side view." loading="lazy" decoding="async">
-            <span class="work-caption"><b>MERCEDES G-WAGON</b><small>Gray SUV side view</small></span>
-          </button>
-          </div>
-        </section>
-        <section class="work-group" aria-label="Mercedes-Benz interior completed work">
-          <div class="work-group-head"><h4>Mercedes-Benz interior</h4></div>
-          <div class="completed-work-grid">
-          <button class="work-card" type="button" data-image="assets/work/collections/mercedes/mercedes-after-driver-side.webp" data-alt="Mercedes-Benz — Driver-side interior view." data-caption="Mercedes-Benz · Driver-side interior view" aria-label="View full-size photo: Mercedes-Benz, Driver-side interior view">
-            <img src="assets/work/collections/mercedes/mercedes-after-driver-side.webp" alt="Mercedes-Benz — Driver-side interior view." loading="lazy" decoding="async">
-            <span class="work-caption"><b>MERCEDES-BENZ</b><small>Driver-side interior view</small></span>
-          </button>
-          </div>
-        </section>
-        <section class="work-group" aria-label="Range Rover completed work">
-          <div class="work-group-head"><h4>Range Rover</h4></div>
-          <div class="completed-work-grid">
-          <button class="work-card" type="button" data-image="assets/work/original/IMG_3948.webp" data-alt="Range Rover — White exterior view." data-caption="Range Rover · White exterior view" aria-label="View full-size photo: Range Rover, White exterior view">
-            <img src="assets/work/original/IMG_3948.webp" alt="Range Rover — White exterior view." loading="lazy" decoding="async">
-            <span class="work-caption"><b>RANGE ROVER</b><small>White exterior view</small></span>
-          </button>
-          <button class="work-card" type="button" data-image="assets/work/original/IMG_3956.webp" data-alt="Range Rover — Red leather steering wheel close-up." data-caption="Range Rover · Red leather steering wheel close-up" aria-label="View full-size photo: Range Rover, Red leather steering wheel close-up">
-            <img src="assets/work/IMG_3956.jpg" alt="Range Rover — Red leather steering wheel close-up." loading="lazy" decoding="async">
-            <span class="work-caption"><b>RANGE ROVER</b><small>Red leather steering wheel close-up</small></span>
-          </button>
-          </div>
-        </section>
-        <section class="work-group" aria-label="Tesla Model X completed work">
-          <div class="work-group-head"><h4>Tesla Model X</h4></div>
-          <div class="completed-work-grid">
-          <button class="work-card" type="button" data-image="assets/work/original/IMG_4318-1.webp" data-alt="Tesla Model X — Black exterior with rear doors open." data-caption="Tesla Model X · Black exterior with rear doors open" aria-label="View full-size photo: Tesla Model X, Black exterior with rear doors open">
-            <img src="assets/work/original/IMG_4318-1.webp" alt="Tesla Model X — Black exterior with rear doors open." loading="lazy" decoding="async">
-            <span class="work-caption"><b>TESLA MODEL X</b><small>Black exterior with rear doors open</small></span>
-          </button>
-          <button class="work-card" type="button" data-image="assets/work/original/IMG_4559.webp" data-alt="Tesla Model X — Silver exterior with doors and rear hatch open." data-caption="Tesla Model X · Silver exterior with doors and rear hatch open" aria-label="View full-size photo: Tesla Model X, Silver exterior with doors and rear hatch open">
-            <img src="assets/work/original/IMG_4559.webp" alt="Tesla Model X — Silver exterior with doors and rear hatch open." loading="lazy" decoding="async">
-            <span class="work-caption"><b>TESLA MODEL X</b><small>Silver exterior with doors and rear hatch open</small></span>
-          </button>
-          </div>
-        </section>
-        <section class="work-group" aria-label="Additional Tesla work completed work">
-          <div class="work-group-head"><h4>Additional Tesla work</h4></div>
-          <div class="completed-work-grid">
-          <button class="work-card" type="button" data-image="assets/work/original/IMG_3412.webp" data-alt="Tesla — Gray electric SUV exterior view." data-caption="Tesla · Gray electric SUV exterior view" aria-label="View full-size photo: Tesla, Gray electric SUV exterior view">
-            <img src="assets/work/original/IMG_3412.webp" alt="Tesla — Gray electric SUV exterior view." loading="lazy" decoding="async">
-            <span class="work-caption"><b>TESLA</b><small>Gray electric SUV exterior view</small></span>
-          </button>
-          <button class="work-card" type="button" data-image="assets/work/original/IMG_3926.webp" data-alt="Tesla — White vehicle rear view." data-caption="Tesla · White vehicle rear view" aria-label="View full-size photo: Tesla, White vehicle rear view">
-            <img src="assets/work/original/IMG_3926.webp" alt="Tesla — White vehicle rear view." loading="lazy" decoding="async">
-            <span class="work-caption"><b>TESLA</b><small>White vehicle rear view</small></span>
-          </button>
-          <button class="work-card" type="button" data-image="assets/work/original/IMG_4564.webp" data-alt="Tesla — Driver-side interior view." data-caption="Tesla · Driver-side interior view" aria-label="View full-size photo: Tesla, Driver-side interior view">
-            <img src="assets/work/original/IMG_4564.webp" alt="Tesla — Driver-side interior view." loading="lazy" decoding="async">
-            <span class="work-caption"><b>TESLA</b><small>Driver-side interior view</small></span>
-          </button>
-          </div>
-        </section>
-        <section class="work-group" aria-label="Tesla Cybertruck completed work">
-          <div class="work-group-head"><h4>Tesla Cybertruck</h4></div>
-          <div class="completed-work-grid">
-          <button class="work-card" type="button" data-image="assets/work/original/IMG_4592.webp" data-alt="Tesla Cybertruck — Stainless exterior side view." data-caption="Tesla Cybertruck · Stainless exterior side view" aria-label="View full-size photo: Tesla Cybertruck, Stainless exterior side view">
-            <img src="assets/work/original/IMG_4592.webp" alt="Tesla Cybertruck — Stainless exterior side view." loading="lazy" decoding="async">
-            <span class="work-caption"><b>TESLA CYBERTRUCK</b><small>Stainless exterior side view</small></span>
-          </button>
-          </div>
-        </section>
-      </div>
-      <p class="rail-hint">Original Enhance My Ride business photos. All gallery images load as you explore.</p>
-    </section>
-
-    <section class="rig section-pad" id="rig" aria-labelledby="rig-title">
-      <div class="rig-copy"><p class="eyebrow">A self-contained mobile setup</p><h2 id="rig-title">Everything rolls up<br>in the back of a <span class="gold-type">CR-V.</span></h2><p>Our 2015 Honda CR-V brings water, power, equipment and products to a suitable home or workplace location. Tap a marker to explore the setup.</p>
-        <ul class="rig-points"><li>Our own water supply</li><li>Our own power</li><li>Mobile equipment and products</li></ul>
-        <p class="rig-detail" id="rig-detail" role="status" aria-live="polite">Tap a marker on the photo to see what comes with us.</p>
-      </div>
-      <figure class="rig-photo"><img src="assets/rig/honda-crv-rig.webp" alt="Open cargo area of the Enhance My Ride 2015 Honda CR-V mobile detailing rig, arranged with its equipment" width="720" height="1280" loading="lazy">
-        <button class="rig-dot dot-water" type="button" aria-pressed="false" aria-label="Our own water supply" data-detail="We bring our own water to suitable appointments. Customers generally do not need to provide water.">01</button>
-        <button class="rig-dot dot-power" type="button" aria-pressed="false" aria-label="Our own power" data-detail="The mobile setup brings its own power, so an outlet is generally not needed.">02</button>
-        <button class="rig-dot dot-washer" type="button" aria-pressed="false" aria-label="Pressure washer and foam" data-detail="A pressure washer and foam equipment travel with the rig for exterior detailing.">03</button>
-        <button class="rig-dot dot-reel" type="button" aria-pressed="false" aria-label="Hose reels and tools" data-detail="Hose reels and detailing tools are organized in the CR-V for on-site service.">04</button>
-        <figcaption><span>The Enhance My Ride mobile setup</span><small>2015 Honda CR-V · Alameda, California</small></figcaption>
-      </figure>
+    <section class="intro section-pad" id="intro" aria-labelledby="intro-title">
+      <div class="intro-mark"><span>EMR</span><i></i></div>
+      <div><p class="eyebrow">Enhance My Ride Auto Spa &amp; Mobile Detailing</p><h2 id="intro-title">We come to you.<br>You relax. <span class="gold-type">We Enhance.</span></h2></div>
+      <p class="intro-copy">A self-contained mobile detailing service based in Alameda, California. We bring water, power, equipment and products to suitable home and workplace appointments across the Bay Area.</p>
     </section>
 
     <section class="packages section-pad" id="packages" aria-labelledby="packages-title">
-      <div class="section-head"><div><p class="eyebrow">Detailing packages</p><h2 id="packages-title">Choose your<br><span class="gold-type">level of care.</span></h2></div><p class="head-note">Thoughtful starting points. Each final scope is confirmed for your vehicle.</p></div>
-      <div class="package-grid">
-        <article class="tier tier-gold"><p class="tier-index">01 / Signature package</p><h3>Enhance Gold</h3><p class="price"><span>from</span> $149</p><p>A practical starting point for refreshing your vehicle and bringing back a cleaner, cared-for appearance.</p><ul><li>Snow foam pre-wash and exterior hand wash</li><li>Wheels, tires and exterior glass</li><li>Interior vacuum and surface clean</li><li>Final quality inspection</li></ul><a class="text-link" href="#request-form" data-package="Enhance Gold">Discuss this package <span aria-hidden="true">↗</span></a></article>
-        <article class="tier tier-black"><p class="tier-index">02 / Premium package</p><h3>Enhance Black Label</h3><p class="price"><span>from</span> $249</p><p>More comprehensive attention inside and out, tailored to the agreed scope and condition of your vehicle.</p><ul><li>Expanded interior and exterior care</li><li>Additional focus on detail areas</li><li>Scope confirmed after review</li><li>Final quality inspection</li></ul><a class="text-link" href="#request-form" data-package="Enhance Black Label">Discuss this package <span aria-hidden="true">↗</span></a></article>
-        <article class="tier tier-chrome"><p class="tier-index">03 / Ultimate package</p><h3>Showroom Edition</h3><p class="price"><span>from</span> $399</p><p>Our most extensive detailing experience, planned around the vehicle and the result you have in mind.</p><ul><li>Comprehensive service plan</li><li>Finishing details selected for the scope</li><li>Any additions agreed before work</li><li>Final quality inspection</li></ul><a class="text-link" href="#request-form" data-package="Showroom Edition">Discuss this package <span aria-hidden="true">↗</span></a></article>
+      <div class="section-head"><div><p class="eyebrow">Services and pricing</p><h2 id="packages-title">Care that fits<br><span class="gold-type">your vehicle.</span></h2></div><p class="head-note">Choose a service to start your request. We confirm the scope and final quote before work begins.</p></div>
+      <div class="package-grid pricing-grid">
+        <article class="tier"><p class="tier-index">Interior care</p><h3>Enhance Interior Detail</h3><p class="price"><span>from</span> $135</p><p>An interior-focused detail. Final scope depends on the vehicle and its condition.</p><a class="button line" href="/index.html?package=Enhance%20Interior%20Detail#request-form" data-package="Enhance Interior Detail">Request this service</a></article>
+        <article class="tier"><p class="tier-index">Deep interior</p><h3>Enhance Deep Interior Detail</h3><p class="price"><span>from</span> $160</p><p>Deep shampoo care where suitable for the upholstery, carpet and vehicle materials.</p><a class="button line" href="/index.html?package=Enhance%20Deep%20Interior%20Detail#request-form" data-package="Enhance Deep Interior Detail">Request this service</a></article>
+        <article class="tier tier-gold"><p class="tier-index">Complete detail</p><h3>Enhance Gold</h3><p class="price"><span>from</span> $175</p><p>Our full detail starting point, with the scope confirmed for your vehicle.</p><ul><li>Foam pre-wash and exterior hand wash</li><li>Wheels, tires and exterior glass</li><li>Interior vacuum and surface clean</li><li>Final quality inspection</li></ul><a class="button gold" href="/index.html?package=Enhance%20Gold#request-form" data-package="Enhance Gold">Request this service</a></article>
+        <article class="tier"><p class="tier-index">Premium detail</p><h3>Enhance Black Label</h3><p class="price"><span>from</span> $220</p><p>Comprehensive inside-and-out care, planned around the agreed scope and condition.</p><a class="button line" href="/index.html?package=Enhance%20Black%20Label#request-form" data-package="Enhance Black Label">Request this service</a></article>
+        <article class="tier" id="coatings"><p class="tier-index">Surface protection</p><h3>Enhance Ceramic Coating</h3><p class="price"><span>from</span> $250</p><p>Ask about ceramic coating options for your vehicle and its paint condition.</p><a class="button line" href="/index.html?package=Enhance%20Ceramic%20Coating#request-form" data-package="Enhance Ceramic Coating">Request this service</a></article>
+        <article class="tier" id="correction"><p class="tier-index">Paint refinement</p><h3>Enhance Paint Correction</h3><p class="price"><span>from</span> $300</p><p>Request a review of the paint and desired result so the right scope can be quoted.</p><a class="button line" href="/index.html?package=Enhance%20Paint%20Correction#request-form" data-package="Enhance Paint Correction">Request this service</a></article>
       </div>
-      <p class="pricing-note">Starting prices. Final pricing depends on vehicle size, condition and requested services. Specialty services are quoted individually. <a href="#request-form">Request a quote.</a></p>
-      <div class="specialty" id="specialty"><div><p class="eyebrow">Specialty services · custom quote</p><h3>Care for the details<br><span class="gold-type">that matter to you.</span></h3><p>Paint protection, wheels, glass and exterior care, interior care, headlight and trim restoration, pet hair removal, heavy soil treatment, engine bay detail and odor treatment are quoted for your vehicle.</p><p class="specialty-note">Standalone mobile appointments start at $100. Final pricing depends on vehicle size, condition and requested services; every extra is discussed with you before work is approved.</p></div><a class="button gold" href="#request-form" data-package="Specialty service — custom quote">Request a Quote <span aria-hidden="true">↗</span></a></div>
+      <p class="pricing-note">Published amounts are starting prices. Vehicle size, condition and the requested scope can change the final quote. Any additional service is confirmed with you before work begins.</p>
+      <div class="specialty" id="specialty"><div><p class="eyebrow">Specialty services · custom quote</p><h3>Personalized care<br><span class="gold-type">for every detail.</span></h3><p>Enhance Paint Protection, Enhance Wheels, Glass &amp; Exterior, Enhance Interior Care, headlight restoration, trim restoration, pet hair removal, heavy soil treatment, engine bay detailing and odor treatment are priced after we review your vehicle and request.</p></div><a class="button gold" href="/index.html?package=Enhance%20Paint%20Protection%20%E2%80%94%20custom%20quote#request-form" data-package="Enhance Paint Protection — custom quote">Request a custom quote <span aria-hidden="true">↗</span></a></div>
+    </section>
+
+    <section class="work-preview section-pad" id="work" aria-labelledby="work-title">
+      <div class="section-head"><div><p class="eyebrow">Selected vehicles</p><h2 id="work-title">The finish<br><span class="gold-type">speaks for itself.</span></h2></div><a class="text-link" href="/gallery.html">View all our work <span aria-hidden="true">↗</span></a></div>
+      <div class="selected-work-grid">
+        <a class="selected-work-card" href="/gallery.html#completed-work"><img src="/assets/work/original/IMG_4890.webp" alt="Cadillac Escalade after exterior detailing" loading="lazy" decoding="async"><span><b>Cadillac Escalade</b><small>Exterior detail</small></span></a>
+        <a class="selected-work-card" href="/gallery.html#completed-work"><img src="/assets/work/original/IMG_4584.webp" alt="Matte gray Mercedes G-Wagon" loading="lazy" decoding="async"><span><b>Mercedes G-Wagon</b><small>Exterior finish</small></span></a>
+        <a class="selected-work-card" href="/gallery.html#before-after"><img src="/assets/work/collections/lexus/lexus-is250-after-front.webp" alt="Lexus IS 250 after detailing" loading="lazy" decoding="async"><span><b>Lexus IS 250</b><small>Before &amp; after work</small></span></a>
+      </div>
+      <div class="before-after-feature" id="before-after">
+        <div class="before-after-title"><p class="eyebrow">Before &amp; after</p><h3>Real work.<br><span class="gold-type">Matched views.</span></h3><p>These photos show a confirmed before-and-after pairing from the same Lexus IS 250.</p><a class="text-link" href="/gallery.html#before-after">See all verified pairs <span aria-hidden="true">↗</span></a></div>
+        <figure><figcaption>Before</figcaption><img src="/assets/work/collections/lexus/lexus-is250-before-front.webp" alt="Lexus IS 250 before detailing, front exterior view" loading="lazy" decoding="async"></figure>
+        <figure><figcaption>After</figcaption><img src="/assets/work/collections/lexus/lexus-is250-after-front.webp" alt="Lexus IS 250 after detailing, matching front exterior view" loading="lazy" decoding="async"></figure>
+      </div>
+    </section>
+
+    <section class="rig section-pad" id="rig" aria-labelledby="rig-title">
+      <div class="rig-copy"><p class="eyebrow">A self-contained mobile setup</p><h2 id="rig-title">We bring<br><span class="gold-type">what we need.</span></h2><p>Our 2015 Honda CR-V carries water, power, equipment and products to suitable home and workplace appointments. Customers generally do not need to provide either water or electricity.</p><ul class="rig-points"><li>Our own water supply</li><li>Our own power</li><li>Mobile equipment and products</li></ul><a class="text-link" href="/about.html">Meet Enhance My Ride <span aria-hidden="true">↗</span></a></div>
+      <figure class="rig-photo"><img src="/assets/rig/honda-crv-rig.webp" alt="Enhance My Ride 2015 Honda CR-V mobile detailing setup" width="720" height="1280" loading="lazy" decoding="async"><figcaption><span>Enhance My Ride mobile setup</span><small>2015 Honda CR-V · Alameda, California</small></figcaption></figure>
     </section>
 
     <section class="reviews section-pad" id="reviews" aria-labelledby="reviews-title">
-      <div class="section-head"><div><p class="eyebrow">Customer feedback</p><h2 id="reviews-title">The experience<br><span class="gold-type">speaks for itself.</span></h2></div><a class="text-link" href="https://search.google.com/local/writereview?placeid=ChIJycCMkhJhCkoRHL89gmaro1g" target="_blank" rel="noopener">Leave a Google review <span aria-hidden="true">↗</span></a></div>
-      <div class="review-grid">
+      <div class="section-head"><div><p class="eyebrow">Customer experiences</p><h2 id="reviews-title">Kind words<br><span class="gold-type">from our clients.</span></h2></div><a class="text-link" href="https://search.google.com/local/writereview?placeid=ChIJycCMkhJhCkoRHL89gmaro1g" target="_blank" rel="noopener">Leave a Google review <span aria-hidden="true">↗</span></a></div>
+      <div class="review-summary" id="review-summary" hidden></div>
+      <div class="review-grid" id="review-grid">
         <blockquote>“He got stains and dirt out that I thought were permanent and made my car look brand new again.”<cite>Neshunna J. · Google review</cite></blockquote>
         <blockquote>“Restored my dusty CLS 550 to showroom beauty, interior and exterior.”<cite>Pretti L. · Google review</cite></blockquote>
         <blockquote>“Black Betty was neglected… Enhance My Ride Mobile Detailing showed up and showed out!”<cite>PJ W. · Google review</cite></blockquote>
         <blockquote>“He did his big one on my Lexus!”<cite>Aesthetics · Google review</cite></blockquote>
       </div>
+      <p class="google-reviews-note">Live Google reviews, when enabled, are shown in relevance order. Google may remove content it identifies as policy-violating. <a href="https://support.google.com/contributionpolicy/answer/7400114" target="_blank" rel="noopener">Google Maps user-generated content policy</a>.</p>
+      <p class="google-live-status" id="google-reviews-status" role="status" aria-live="polite">Showing selected customer feedback. Live Google review connection is not yet configured.</p>
+      <div class="google-photos-block" id="google-photos-block" hidden><div class="gallery-subhead"><div><p class="eyebrow">Google Maps</p><h3>Photos from our business listing</h3></div><p class="gallery-note">Photos are provided separately from review text and credited to their contributors.</p></div><div class="google-photo-grid" id="google-photo-grid"></div></div>
     </section>
 
     <section class="area section-pad" id="area" aria-labelledby="area-title">
-      <div class="area-copy"><p class="eyebrow">Based in Alameda, California</p><h2 id="area-title">Within 40 miles<br>of <span class="gold-type">Alameda.</span></h2><p>We serve suitable home and workplace locations across the San Francisco Bay Area. Coverage is confirmed by exact address before an appointment is approved. Locations beyond 40 miles may be considered with a travel fee agreed in advance.</p><a class="button line" href="#request-form">Check your address</a></div>
-      <div class="area-visual" aria-label="Service area cities"><div class="area-ring"><span class="area-center">ALAMEDA</span><span class="town town-one">OAKLAND</span><span class="town town-two">BERKELEY</span><span class="town town-three">SAN LEANDRO</span><span class="town town-four">EMERYVILLE</span><span class="town town-five">HAYWARD</span><span class="town town-six">SAN FRANCISCO</span></div><p>Alameda · Oakland · Berkeley · San Leandro · Emeryville · Hayward · San Francisco · surrounding communities</p></div>
+      <div class="area-copy"><p class="eyebrow">Based in Alameda, California</p><h2 id="area-title">Across all nine<br><span class="gold-type">Bay Area counties.</span></h2><p>Enhance My Ride serves suitable home and workplace locations throughout the nine counties below. Share the exact service address when requesting your detail; availability and any travel fee are confirmed before the appointment.</p><a class="button line" href="/service-area.html">Explore our service area</a></div>
+      <div class="county-list"><span>Alameda</span><span>Contra Costa</span><span>Marin</span><span>Napa</span><span>San Francisco</span><span>San Mateo</span><span>Santa Clara</span><span>Solano</span><span>Sonoma</span></div>
+    </section>
+
+    <section class="faq section-pad" id="faq" aria-labelledby="faq-title">
+      <div class="section-head"><div><p class="eyebrow">Helpful details</p><h2 id="faq-title">A few things<br><span class="gold-type">to know.</span></h2></div><a class="text-link" href="/booking-policies.html">Booking policies <span aria-hidden="true">↗</span></a></div>
+      <div class="faq-list">
+        <details><summary>Do you come to my home or workplace?</summary><p>Yes. Enhance My Ride is a mobile detailing business. We confirm the exact service location and access details when reviewing your request.</p></details>
+        <details><summary>Do I need to provide water or power?</summary><p>We bring our own water and power, so customers generally do not need to provide either.</p></details>
+        <details><summary>Which Bay Area locations do you serve?</summary><p>We serve suitable locations across Alameda, Contra Costa, Marin, Napa, San Francisco, San Mateo, Santa Clara, Solano and Sonoma counties. We confirm address availability and any travel fee before booking.</p></details>
+        <details><summary>Are the displayed service prices final?</summary><p>Prices shown are starting points. Vehicle size, condition and requested scope can affect the final quote. Specialty services are custom quoted, and additions are agreed before work begins.</p></details>
+        <details><summary>Can I send photos with my request?</summary><p>Yes. The secure detail request form accepts up to five vehicle photos so we can review the condition and requested service.</p></details>
+        <details><summary>How do deposits and rescheduling work?</summary><p>See our <a href="/booking-policies.html">booking policies</a> for current deposit and rescheduling details. We confirm payment terms before an appointment is reserved.</p></details>
+      </div>
     </section>
 
     <section class="booking section-pad" id="request-form" aria-labelledby="request-title">
-      <div class="booking-copy"><p class="eyebrow">Personalized service, clear next steps</p><h2 id="request-title">REQUEST A DETAIL /<br><span class="gold-type">GET A QUOTE</span></h2><p>Tell us where the vehicle is located, what you drive, and which service you’re considering. Add condition details and photos so we can review the request.</p><p class="contact-links"><a href="tel:+13233271806">Call (323) 327-1806</a><span>·</span><a href="sms:+13233271806">Text us</a></p></div>
+      <div class="booking-copy"><p class="eyebrow">Your vehicle · your location · your request</p><h2 id="request-title">REQUEST A DETAIL /<br><span class="gold-type">GET A QUOTE</span></h2><p>Tell us where the vehicle is located, what you drive and which service you have in mind. Add condition details and photos for a more useful review.</p><p class="contact-links"><a href="tel:+13233271806">Call (323) 327-1806</a><span>·</span><a href="sms:+13233271806">Text us</a></p></div>
       <form class="quote-form" id="quote-form" method="post" enctype="multipart/form-data">
-        <p class="eyebrow">Request a detail / get a quote</p>
+        <p class="eyebrow">Secure detail request</p>
         <div class="form-row"><label>Your name<input name="name" autocomplete="name" required></label><label>Email address<input name="email" type="email" autocomplete="email" required></label></div>
         <div class="form-row"><label>Phone number<input name="phone" type="tel" autocomplete="tel" required></label><label>Service location / city<input name="location" autocomplete="address-level2" required></label></div>
-        <div class="form-row"><label>Vehicle year, make &amp; model<input name="vehicle" placeholder="e.g. 2022 Audi Q5" required></label><label>Package or service<select name="package" required><option value="" disabled selected>Select a package or service</option><option value="Enhance Gold">Enhance Gold — $149 starting</option><option value="Enhance Black Label">Enhance Black Label — $249 starting</option><option value="Showroom Edition">Showroom Edition — $399 starting</option><option value="Specialty service — custom quote">Specialty service — custom quote</option><option value="Not sure yet">Not sure yet</option></select></label></div>
+        <div class="form-row"><label>Vehicle year, make &amp; model<input name="vehicle" placeholder="e.g. 2022 Audi Q5" required></label><label>Package or service<select name="package" required><option value="" disabled selected>Select a package or service</option><option value="Enhance Interior Detail">Enhance Interior Detail — $135 starting</option><option value="Enhance Deep Interior Detail">Enhance Deep Interior Detail — $160 starting</option><option value="Enhance Gold">Enhance Gold Full Detail — $175 starting</option><option value="Enhance Black Label">Enhance Black Label Detail — $220 starting</option><option value="Enhance Ceramic Coating">Enhance Ceramic Coating — $250 starting</option><option value="Enhance Paint Correction">Enhance Paint Correction — $300 starting</option><option value="Enhance Showroom Edition — custom quote">Enhance Showroom Edition — custom quote</option><option value="Enhance Paint Protection — custom quote">Enhance Paint Protection — custom quote</option><option value="Enhance Wheels, Glass &amp; Exterior — custom quote">Enhance Wheels, Glass &amp; Exterior — custom quote</option><option value="Enhance Interior Care — custom quote">Enhance Interior Care — custom quote</option><option value="Not sure yet">Not sure yet</option></select></label></div>
         <div class="form-row"><label>Preferred date<input name="preferred_date" type="date" autocomplete="off"></label><label>Preferred time<select name="preferred_time"><option value="">Flexible</option><option>8 AM – 10 AM</option><option>10 AM – 12 PM</option><option>12 PM – 2 PM</option><option>2 PM – 4 PM</option><option>4 PM – 6 PM</option></select></label></div>
         <label>Vehicle condition &amp; special requests<textarea name="condition" rows="4" placeholder="Condition, priorities or specialty service requested"></textarea></label>
         <label class="file-label">Vehicle photos<input name="photos" type="file" accept="image/*" multiple><small>Optional. Select up to 5 images (8 MB total).</small></label>
@@ -547,20 +168,17 @@
     </section>
 
     <footer class="footer">
-      <div class="footer-main"><a class="footer-brand" href="#top"><img src="assets/brand/logo.webp" width="60" height="60" alt=""><span><b>Enhance My Ride</b><small>Auto Spa &amp; Mobile Detailing</small></span></a><p>Premium mobile detailing based in Alameda, California.<br><em>We come to you. You relax. We Enhance.</em></p><nav class="footer-links" aria-label="Footer"><a href="#top">Home</a><a href="#work">Our work</a><a href="#rig">The rig</a><a href="#packages">Packages</a><a href="#area">Service area</a><a href="#request-form">Request a detail</a><a href="scan.html">Digital business card</a><a href="tel:+13233271806">(323) 327-1806</a><a href="mailto:info@enhancemyride.com">info@enhancemyride.com</a><a href="https://www.instagram.com/enhancemyridemobiledetailing/" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/enhancemyridemobiledetailing/" target="_blank" rel="noopener">Facebook</a><a href="https://www.tiktok.com/@enhancemyride" target="_blank" rel="noopener">TikTok</a><a href="https://www.youtube.com/@enhancemyride" target="_blank" rel="noopener">YouTube</a></nav></div>
-      <div class="footer-bottom"><span>© <span id="year">2026</span> Enhance My Ride Auto Spa &amp; Mobile Detailing</span><span>We come to you. You relax. We Enhance.</span></div>
+      <div class="footer-main"><a class="footer-brand" href="/"><img src="/assets/brand/logo.webp" width="60" height="60" alt=""><span><b>Enhance My Ride</b><small>Auto Spa &amp; Mobile Detailing</small></span></a><p>Premium mobile detailing based in Alameda, California.<br><em>We come to you. You relax. We Enhance.</em></p><nav class="footer-links" aria-label="Footer navigation"><a href="/">Home</a><a href="/services.html">Services</a><a href="/gallery.html">Our work</a><a href="/about.html">About</a><a href="/service-area.html">Service area</a><a href="/booking-policies.html">Booking policies</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a><a href="/scan.html">Digital business card</a><a href="tel:+13233271806">(323) 327-1806</a><a href="mailto:info@enhancemyride.com">info@enhancemyride.com</a><a href="https://www.instagram.com/enhancemyridemobiledetailing/" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/enhancemyridemobiledetailing/" target="_blank" rel="noopener">Facebook</a><a href="https://www.tiktok.com/@enhancemyride" target="_blank" rel="noopener">TikTok</a><a href="https://www.youtube.com/@enhancemyride" target="_blank" rel="noopener">YouTube</a></nav></div>
+      <div class="footer-bottom"><span>© <span id="year">2026</span> Enhance My Ride Auto Spa &amp; Mobile Detailing</span><span>Alameda · Serving all nine Bay Area counties</span></div>
     </footer>
-
-
   </main>
 
   <button class="ask-button" id="ask-button" type="button" aria-expanded="false" aria-controls="ask-panel">Ask Enhance</button>
   <aside class="ask-panel" id="ask-panel" hidden aria-label="Ask Enhance">
-    <div class="ask-head"><img src="assets/brand/logo.webp" width="40" height="40" alt=""><div><b>Ask Enhance</b><span>Choose the next step that works for you.</span></div><button class="ask-close" id="ask-close" type="button" aria-label="Close Ask Enhance">×</button></div>
+    <div class="ask-head"><img src="/assets/brand/logo.webp" width="40" height="40" alt=""><div><b>Ask Enhance</b><span>Choose the next step that works for you.</span></div><button class="ask-close" id="ask-close" type="button" aria-label="Close Ask Enhance">×</button></div>
     <div class="ask-actions"><a href="#request-form">Request a detail / get a quote</a><a href="tel:+13233271806">Call (323) 327-1806</a><a href="mailto:info@enhancemyride.com">Email Enhance My Ride</a></div>
   </aside>
-
   <dialog class="lightbox" id="lightbox" aria-label="Expanded detailing photo"><button type="button" class="lightbox-close" aria-label="Close image">×</button><img src="" alt=""><p></p></dialog>
-  <script src="js/site.js" defer></script>
+  <script src="/js/site.js" defer></script>
 </body>
 </html>
