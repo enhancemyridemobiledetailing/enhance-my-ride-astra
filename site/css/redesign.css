@@ -50,24 +50,24 @@ body.has-promo .bar { top: 34px; }
 .menu-toggle { display: none; width: 42px; height: 40px; border: 1px solid var(--line); background: transparent; color: white; cursor: pointer; }
 .menu-toggle span { width: 18px; height: 1px; background: currentColor; }
 
-.hero-single { position: relative; display: grid; height: min(100svh, 1080px); min-height: 650px; place-items: center; overflow: hidden; isolation: isolate; background: #080807; }
-.hero-single > .hero-film { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 44%; transform: scale(1.01); }
-.hero-single::after { position: absolute; z-index: -1; inset: 0; background: linear-gradient(90deg,rgba(0,0,0,.25),transparent 45%,rgba(0,0,0,.2)),linear-gradient(0deg,rgba(0,0,0,.72),rgba(0,0,0,.16) 45%,rgba(0,0,0,.52)); content: ""; }
-.hero-shade { position: absolute; z-index: -1; inset: 0; background: radial-gradient(ellipse at center, transparent 15%,rgba(0,0,0,.2) 100%); pointer-events: none; }
-.hero-copy-center { position: relative; inset: auto; z-index: 1; width: min(100% - 44px, 900px); margin: 38px auto 0; text-align: center; animation: rise-in .9s both; }
-.hero-logo { width: 76px; height: 76px; margin: 0 auto 20px; border-radius: 50%; object-fit: contain; filter: drop-shadow(0 2px 15px #0009); }
-.hero-kicker { margin: 0 0 14px; color: var(--gold-light); font-size: 11px; font-weight: 800; letter-spacing: .22em; text-shadow: 0 2px 12px #000; text-transform: uppercase; }
-.hero-title { max-width: 12ch; margin: 0 auto; color: white; font-size: clamp(64px, 10vw, 148px); font-weight: 900; line-height: .82; text-shadow: 0 4px 35px #0009; text-transform: uppercase; }
-.hero-title span { display: block; }
-.hero-title span:last-child { color: var(--gold); }
-.hero-support { max-width: 52ch; margin: 23px auto 0; color: #f4f1e8; font-size: clamp(14px, 1.45vw, 17px); text-shadow: 0 2px 12px #000; }
-.hero-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
-.hero-actions .button { min-width: 190px; }
-.hero-phone { display: inline-block; margin-top: 19px; color: white; font-size: 12px; font-weight: 700; text-decoration: none; text-shadow: 0 2px 10px #000; }
-.hero-phone:hover { color: var(--gold-light); }
-.hero-rating { width: fit-content; margin: 0 auto 14px; padding: 8px 13px; border: 1px solid #fff5; background: #0005; color: white; font-size: 12px; font-weight: 700; }
-.hero-rating[hidden] { display: none; }
-.hero-scroll { position: absolute; bottom: 26px; left: 50%; color: var(--gold-light); font-size: 26px; text-decoration: none; transform: translateX(-50%); animation: float 1.8s ease-in-out infinite; }
+.hero-panels { position: relative; height: 100svh; min-height: 690px; isolation: isolate; background: #080807; }
+.hero-panels .triptych { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 6px; padding: 0; }
+.hero-panels .panel { border: 0; }
+.hero-panels .panel-foam video { object-position: 48% 48%; }
+.hero-panels .panel-wheel video { object-position: 29% 52%; }
+.hero-panels .panel-finish video { object-position: 50% 48%; }
+.hero-panels .panel::after { background: linear-gradient(180deg,rgba(0,0,0,.18),transparent 36%,rgba(0,0,0,.12) 67%,rgba(0,0,0,.28)); }
+.hero-panels .panel-tag { top: clamp(112px,16vh,178px); left: 50%; max-width: calc(100% - 24px); padding: 10px 15px; border: 0; background: rgba(5,5,4,.84); box-shadow: 0 8px 24px #0004; backdrop-filter: none; transform: translateX(-50%); }
+.hero-panels .panel-tag b { font-size: clamp(16px,1.7vw,23px); letter-spacing: .06em; }
+.hero-panels .panel-wheel .panel-tag, .hero-panels .panel-finish .panel-tag { top: clamp(112px,16vh,178px); }
+.hero-panels .portrait-film { background: #111; }
+.hero-panels .hero-shade { z-index: 1; background: linear-gradient(180deg,rgba(0,0,0,.12),transparent 32%,transparent 54%,rgba(0,0,0,.27)); }
+.hero-panels .hero-copy { z-index: 2; right: var(--pad); bottom: clamp(42px,7vh,82px); left: var(--pad); width: auto; animation: rise-in .9s both; }
+.hero-panels .hero-kicker { margin: 0 0 15px; color: var(--gold-light); font-size: clamp(9px,.9vw,12px); font-weight: 800; letter-spacing: .22em; line-height: 1.4; text-shadow: 0 2px 12px #000d; text-transform: uppercase; }
+.hero-panels .hero-title { max-width: none; margin: 0; color: white; font: italic 900 clamp(58px,8.9vw,138px)/.79 var(--display); letter-spacing: -.025em; text-shadow: 0 4px 28px #0009; text-transform: uppercase; }
+.hero-panels .hero-title span, .hero-panels .hero-title strong { display: block; }
+.hero-panels .hero-title strong { color: var(--gold); font-weight: 900; }
+.hero-panels .hero-scroll { position: absolute; z-index: 3; bottom: 18px; left: 50%; color: var(--gold-light); font-size: 25px; text-decoration: none; transform: translateX(-50%); animation: float 1.8s ease-in-out infinite; }
 @keyframes rise-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes float { 50% { transform: translate(-50%,6px); } }
 
@@ -302,16 +302,15 @@ body.has-promo .bar { top: 34px; }
   .nav-dropdown-menu { position: static; min-width: 0; padding: 4px 8px 8px 16px; border: 0; background: transparent; box-shadow: none; }
   .nav-dropdown-menu a { padding: 12px; border-bottom: 1px solid #ffffff10; }
   body.has-promo .bar { top: 34px; }
-  .hero-single { min-height: 700px; height: max(100svh,700px); }
-  .hero-single > .hero-film { object-position: 48% center; }
-  .hero-copy-center { width: min(100% - 38px,640px); margin-top: 48px; }
-  .hero-logo { width: 66px; height: 66px; margin-bottom: 17px; }
-  .hero-kicker { max-width: 34ch; margin-inline: auto; font-size: 9px; line-height: 1.5; }
-  .hero-title { max-width: 11ch; font-size: clamp(57px,16vw,100px); }
-  .hero-support { max-width: 38ch; margin-top: 18px; font-size: 13px; }
-  .hero-actions { gap: 9px; margin-top: 22px; }
-  .hero-actions .button { min-width: 0; flex: 1; padding-inline: 12px; font-size: 9px; }
-  .hero-scroll { bottom: 16px; }
+  .hero-panels { min-height: 720px; height: max(100svh,720px); }
+  .hero-panels .triptych { display: none; }
+  .hero-panels .portrait-film { display: block; }
+  .hero-panels .portrait-film video { object-position: 52% 45%; animation-duration: 32s; }
+  .hero-panels .hero-shade { background: linear-gradient(180deg,rgba(0,0,0,.12),transparent 30%,rgba(0,0,0,.10) 55%,rgba(0,0,0,.42)); }
+  .hero-panels .hero-copy { right: 18px; bottom: 112px; left: 18px; }
+  .hero-panels .hero-kicker { max-width: 36ch; margin-bottom: 13px; font-size: 9px; letter-spacing: .15em; line-height: 1.5; }
+  .hero-panels .hero-title { font-size: clamp(42px,10.6vw,73px); line-height: .84; letter-spacing: -.035em; }
+  .hero-panels .hero-scroll { display: none; }
   .intro { grid-template-columns: 1fr; gap: 18px; }
   .intro-mark { font-size: 28px; }
   .intro h2 { font-size: clamp(39px,10vw,58px); }
@@ -359,11 +358,15 @@ body.has-promo .bar { top: 34px; }
 @media (max-width: 390px) {
   .brand-word { font-size: 12px; letter-spacing: .035em; }
   .bar-book { padding-inline: 9px; font-size: 8px; }
-  .hero-title { font-size: 55px; }
+  .hero-panels .hero-title { font-size: 41px; }
+  .hero-panels .hero-kicker { font-size: 8px; }
   .county-list { grid-template-columns: repeat(2,minmax(0,1fr)); }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-  .hero-single > .hero-film { display: none; }
-  .hero-single { background: center/cover no-repeat url("/assets/film/foam.jpg"); }
+  .hero-panels .panel-foam { background: center/cover no-repeat url("/assets/film/foam.jpg"); }
+  .hero-panels .panel-wheel { background: center/cover no-repeat url("/assets/film/rinse.jpg"); }
+  .hero-panels .panel-finish { background: center/cover no-repeat url("/assets/film/finish.jpg"); }
+  .hero-panels .panel video, .hero-panels .portrait-film video { display: none; }
+  .hero-panels .portrait-film { background: center/cover no-repeat url("/assets/film/hero-phone.jpg"); }
 }
