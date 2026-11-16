@@ -64,7 +64,7 @@ body.has-promo .bar { top: 34px; }
 .hero-panels .hero-shade { z-index: 1; background: linear-gradient(180deg,rgba(0,0,0,.12),transparent 32%,transparent 54%,rgba(0,0,0,.27)); }
 .hero-panels .hero-copy { z-index: 2; right: var(--pad); bottom: clamp(42px,7vh,82px); left: var(--pad); width: auto; animation: rise-in .9s both; }
 .hero-panels .hero-kicker { margin: 0 0 15px; color: var(--gold-light); font-size: clamp(9px,.9vw,12px); font-weight: 800; letter-spacing: .22em; line-height: 1.4; text-shadow: 0 2px 12px #000d; text-transform: uppercase; }
-.hero-panels .hero-title { max-width: none; margin: 0; color: white; font: italic 900 clamp(58px,8.9vw,138px)/.79 var(--display); letter-spacing: -.025em; text-shadow: 0 4px 28px #0009; text-transform: uppercase; }
+.hero-panels .hero-title { max-width: none; margin: 0; color: white; font: italic 900 clamp(58px,15vw,200px)/.79 var(--display); letter-spacing: -.025em; text-shadow: 0 4px 28px #0009; text-transform: uppercase; }
 .hero-panels .hero-title span, .hero-panels .hero-title strong { display: block; }
 .hero-panels .hero-title strong { color: var(--gold); font-weight: 900; }
 .hero-panels .hero-scroll { position: absolute; z-index: 3; bottom: 18px; left: 50%; color: var(--gold-light); font-size: 25px; text-decoration: none; transform: translateX(-50%); animation: float 1.8s ease-in-out infinite; }
